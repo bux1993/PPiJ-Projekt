@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4f07e50a27d4b1d865bca9f20837ad3" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjektBazaModel.Achievement" Width="1.5" PointX="7.375" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.Kategorije" Width="1.5" PointX="0.875" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.OstvareniAchievemnti" Width="1.5" PointX="5.375" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.Pitanja" Width="1.5" PointX="7" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.Predmeti" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.Rezultati" Width="1.5" PointX="3.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.UserInfo" Width="1.5" PointX="3.5" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="ProjektBazaModel.FK_OstvareniAchievemnti_Achievements" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjektBazaModel.FK_Kategorije_Predmeti" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjektBazaModel.FK_PovijestGrcka_Kategorije" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjektBazaModel.FK_Rezultati_Kategorije" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjektBazaModel.FK_OstvareniAchievemnti_UserInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjektBazaModel.FK_Rezultati_UserInfo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,48 @@
+﻿@model ProjektPPiJ.Models.OstvareniAchievemnti
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>OstvareniAchievemnti</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AchivementOstvaren)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AchivementOstvaren)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Achievement.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Achievement.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserInfo.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserInfo.Username)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
