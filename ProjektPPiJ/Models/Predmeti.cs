@@ -16,12 +16,12 @@ namespace ProjektPPiJ.Models
     {
         public Predmeti()
         {
-            this.Kategorijes = new HashSet<Kategorije>();
+            this.Kategorije = new HashSet<Kategorije>();
         }
     
         public int PredmetID { get; set; }
         public string PredmetName { get; set; }
     
-        public virtual ICollection<Kategorije> Kategorijes { get; set; }
+        public virtual ICollection<Kategorije> Kategorije { get; set; }
     }
 }

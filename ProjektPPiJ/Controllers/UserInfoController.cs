@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -12,22 +13,22 @@ namespace ProjektPPiJ.Controllers
 {
     public class UserInfoController : Controller
     {
-        private ProjektBazaEntities db = new ProjektBazaEntities();
+        private BazaEntities db = new BazaEntities();
 
         // GET: UserInfo
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.UserInfoes.ToList());
+            return View(await db.UserInfo.ToListAsync());
         }
 
         // GET: UserInfo/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = db.UserInfoes.Find(id);
+            UserInfo userInfo = await db.UserInfo.FindAsync(id);
             if (userInfo == null)
             {
                 return HttpNotFound();
@@ -46,12 +47,12 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Username,Password,Name,LastName,Email,UserType")] UserInfo userInfo)
+        public async Task<ActionResult> Create([Bind(Include = "UserID,Username,Password,Name,LastName,Email,UserType,Picture")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {
-                db.UserInfoes.Add(userInfo);
-                db.SaveChanges();
+                db.UserInfo.Add(userInfo);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -59,13 +60,13 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: UserInfo/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = db.UserInfoes.Find(id);
+            UserInfo userInfo = await db.UserInfo.FindAsync(id);
             if (userInfo == null)
             {
                 return HttpNotFound();
@@ -78,25 +79,25 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Username,Password,Name,LastName,Email,UserType")] UserInfo userInfo)
+        public async Task<ActionResult> Edit([Bind(Include = "UserID,Username,Password,Name,LastName,Email,UserType,Picture")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(userInfo).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(userInfo);
         }
 
         // GET: UserInfo/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = db.UserInfoes.Find(id);
+            UserInfo userInfo = await db.UserInfo.FindAsync(id);
             if (userInfo == null)
             {
                 return HttpNotFound();
@@ -107,11 +108,11 @@ namespace ProjektPPiJ.Controllers
         // POST: UserInfo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            UserInfo userInfo = db.UserInfoes.Find(id);
-            db.UserInfoes.Remove(userInfo);
-            db.SaveChanges();
+            UserInfo userInfo = await db.UserInfo.FindAsync(id);
+            db.UserInfo.Remove(userInfo);
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

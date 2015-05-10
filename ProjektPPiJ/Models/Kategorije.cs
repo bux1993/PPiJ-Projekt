@@ -16,8 +16,8 @@ namespace ProjektPPiJ.Models
     {
         public Kategorije()
         {
-            this.Pitanjas = new HashSet<Pitanja>();
-            this.Rezultatis = new HashSet<Rezultati>();
+            this.Pitanja = new HashSet<Pitanja>();
+            this.Rezultati = new HashSet<Rezultati>();
         }
     
         public int KategorijaID { get; set; }
@@ -25,7 +25,7 @@ namespace ProjektPPiJ.Models
         public string KategorijaName { get; set; }
     
         public virtual Predmeti Predmeti { get; set; }
-        public virtual ICollection<Pitanja> Pitanjas { get; set; }
-        public virtual ICollection<Rezultati> Rezultatis { get; set; }
+        public virtual ICollection<Pitanja> Pitanja { get; set; }
+        public virtual ICollection<Rezultati> Rezultati { get; set; }
     }
 }

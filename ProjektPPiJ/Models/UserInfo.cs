@@ -17,37 +17,40 @@ namespace ProjektPPiJ.Models
     {
         public UserInfo()
         {
-            this.OstvareniAchievemntis = new HashSet<OstvareniAchievemnti>();
-            this.Rezultatis = new HashSet<Rezultati>();
+            this.OstvareniAchievementi = new HashSet<OstvareniAchievementi>();
+            this.Rezultati = new HashSet<Rezultati>();
         }
-       
+    
         public int UserID { get; set; }
 
-        [Required()]
         [Display(Name = "Korisničko ime")]
+        [Required()]
         public string Username { get; set; }
 
-        [Required()]
         [Display(Name = "Lozinka")]
-        [DataType(DataType.Password)]
+        [Required()]
         public string Password { get; set; }
 
-        [Required()]
         [Display(Name = "Ime")]
+        [Required()]
         public string Name { get; set; }
 
-        [Required()]
         [Display(Name = "Prezime")]
+        [Required()]
         public string LastName { get; set; }
 
-        [Required()]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
+        [Required()]
         public string Email { get; set; }
 
+
         public bool UserType { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        public byte[] Picture { get; set; }
     
-        public virtual ICollection<OstvareniAchievemnti> OstvareniAchievemntis { get; set; }
-        public virtual ICollection<Rezultati> Rezultatis { get; set; }
+        public virtual ICollection<OstvareniAchievementi> OstvareniAchievementi { get; set; }
+        public virtual ICollection<Rezultati> Rezultati { get; set; }
     }
 }

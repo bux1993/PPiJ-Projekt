@@ -4,20 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c4f07e50a27d4b1d865bca9f20837ad3" Name="Diagram1">
-        <EntityTypeShape EntityType="ProjektBazaModel.Achievement" Width="1.5" PointX="7.375" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjektBazaModel.Kategorije" Width="1.5" PointX="0.875" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjektBazaModel.OstvareniAchievemnti" Width="1.5" PointX="5.375" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjektBazaModel.Pitanja" Width="1.5" PointX="7" PointY="2.125" IsExpanded="true" />
+      <Diagram DiagramId="389c1ca2f518400bbdb9c264316eb1ff" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjektBazaModel.Achievements" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.Kategorije" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.OstvareniAchievementi" Width="1.5" PointX="8.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.Pitanja" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjektBazaModel.Predmeti" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjektBazaModel.Rezultati" Width="1.5" PointX="3.25" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjektBazaModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjektBazaModel.UserInfo" Width="1.5" PointX="3.5" PointY="6" IsExpanded="true" />
-        <AssociationConnector Association="ProjektBazaModel.FK_OstvareniAchievemnti_Achievements" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProjektBazaModel.Rezultati" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjektBazaModel.UserInfo" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ProjektBazaModel.FK_Achievements_Achievements" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjektBazaModel.FK_OstvareniAchievementi_Achievements" ManuallyRouted="false" />
         <AssociationConnector Association="ProjektBazaModel.FK_Kategorije_Predmeti" ManuallyRouted="false" />
         <AssociationConnector Association="ProjektBazaModel.FK_PovijestGrcka_Kategorije" ManuallyRouted="false" />
         <AssociationConnector Association="ProjektBazaModel.FK_Rezultati_Kategorije" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjektBazaModel.FK_OstvareniAchievemnti_UserInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjektBazaModel.FK_OstvareniAchievementi_UserInfo" ManuallyRouted="false" />
         <AssociationConnector Association="ProjektBazaModel.FK_Rezultati_UserInfo" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

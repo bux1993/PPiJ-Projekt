@@ -22,7 +22,7 @@
           <Property Name="PredmetID" Type="int" Nullable="false" />
           <Property Name="KategorijaName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="OstvareniAchievemnti">
+        <EntityType Name="OstvareniAchievementi">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="AchievementID" />
@@ -32,7 +32,7 @@
           <Property Name="AchivementOstvaren" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'TocanPoredak' in the table 'ProjektBaza.dbo.Pitanja' was excluded.-->
+warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'TocanPoredak' in the table 'C:\USERS\NIKOLAB\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\PROJEKTPPIJ\PROJEKTPPIJ\APP_DATA\PROJEKTBAZA.MDF.dbo.Pitanja' was excluded.-->
         <EntityType Name="Pitanja">
           <Key>
             <PropertyRef Name="PitanjeID" />
@@ -85,7 +85,20 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserType" Type="bit" Nullable="false" />
+          <Property Name="Picture" Type="image" />
         </EntityType>
+        <Association Name="FK_Achievements_Achievements">
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="1" />
+          <End Role="Achievements1" Type="Self.Achievements" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Achievements">
+              <PropertyRef Name="AchievementID" />
+            </Principal>
+            <Dependent Role="Achievements1">
+              <PropertyRef Name="AchievementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Kategorije_Predmeti">
           <End Role="Predmeti" Type="Self.Predmeti" Multiplicity="1" />
           <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="*" />
@@ -98,26 +111,26 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OstvareniAchievemnti_Achievements">
+        <Association Name="FK_OstvareniAchievementi_Achievements">
           <End Role="Achievements" Type="Self.Achievements" Multiplicity="1" />
-          <End Role="OstvareniAchievemnti" Type="Self.OstvareniAchievemnti" Multiplicity="*" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Achievements">
               <PropertyRef Name="AchievementID" />
             </Principal>
-            <Dependent Role="OstvareniAchievemnti">
+            <Dependent Role="OstvareniAchievementi">
               <PropertyRef Name="AchievementID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OstvareniAchievemnti_UserInfo">
+        <Association Name="FK_OstvareniAchievementi_UserInfo">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
-          <End Role="OstvareniAchievemnti" Type="Self.OstvareniAchievemnti" Multiplicity="*" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserInfo">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="OstvareniAchievemnti">
+            <Dependent Role="OstvareniAchievementi">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -161,23 +174,27 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
         <EntityContainer Name="ProjektBazaModelStoreContainer">
           <EntitySet Name="Achievements" EntityType="Self.Achievements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategorije" EntityType="Self.Kategorije" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OstvareniAchievemnti" EntityType="Self.OstvareniAchievemnti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OstvareniAchievementi" EntityType="Self.OstvareniAchievementi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pitanja" EntityType="Self.Pitanja" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Predmeti" EntityType="Self.Predmeti" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rezultati" EntityType="Self.Rezultati" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Achievements_Achievements" Association="Self.FK_Achievements_Achievements">
+            <End Role="Achievements" EntitySet="Achievements" />
+            <End Role="Achievements1" EntitySet="Achievements" />
+          </AssociationSet>
           <AssociationSet Name="FK_Kategorije_Predmeti" Association="Self.FK_Kategorije_Predmeti">
             <End Role="Predmeti" EntitySet="Predmeti" />
             <End Role="Kategorije" EntitySet="Kategorije" />
           </AssociationSet>
-          <AssociationSet Name="FK_OstvareniAchievemnti_Achievements" Association="Self.FK_OstvareniAchievemnti_Achievements">
+          <AssociationSet Name="FK_OstvareniAchievementi_Achievements" Association="Self.FK_OstvareniAchievementi_Achievements">
             <End Role="Achievements" EntitySet="Achievements" />
-            <End Role="OstvareniAchievemnti" EntitySet="OstvareniAchievemnti" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
           </AssociationSet>
-          <AssociationSet Name="FK_OstvareniAchievemnti_UserInfo" Association="Self.FK_OstvareniAchievemnti_UserInfo">
+          <AssociationSet Name="FK_OstvareniAchievementi_UserInfo" Association="Self.FK_OstvareniAchievementi_UserInfo">
             <End Role="UserInfo" EntitySet="UserInfo" />
-            <End Role="OstvareniAchievemnti" EntitySet="OstvareniAchievemnti" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
           </AssociationSet>
           <AssociationSet Name="FK_PovijestGrcka_Kategorije" Association="Self.FK_PovijestGrcka_Kategorije">
             <End Role="Kategorije" EntitySet="Kategorije" />
@@ -197,7 +214,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjektBazaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Achievement">
+        <EntityType Name="Achievements">
           <Key>
             <PropertyRef Name="AchievementID" />
           </Key>
@@ -205,7 +222,9 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Poruka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="OstvareniAchievemntis" Relationship="Self.FK_OstvareniAchievemnti_Achievements" FromRole="Achievements" ToRole="OstvareniAchievemnti" />
+          <NavigationProperty Name="Achievements1" Relationship="Self.FK_Achievements_Achievements" FromRole="Achievements" ToRole="Achievements1" />
+          <NavigationProperty Name="Achievements2" Relationship="Self.FK_Achievements_Achievements" FromRole="Achievements1" ToRole="Achievements" />
+          <NavigationProperty Name="OstvareniAchievementi" Relationship="Self.FK_OstvareniAchievementi_Achievements" FromRole="Achievements" ToRole="OstvareniAchievementi" />
         </EntityType>
         <EntityType Name="Kategorije">
           <Key>
@@ -215,10 +234,10 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="PredmetID" Type="Int32" Nullable="false" />
           <Property Name="KategorijaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Predmeti" Relationship="Self.FK_Kategorije_Predmeti" FromRole="Kategorije" ToRole="Predmeti" />
-          <NavigationProperty Name="Pitanjas" Relationship="Self.FK_PovijestGrcka_Kategorije" FromRole="Kategorije" ToRole="Pitanja" />
-          <NavigationProperty Name="Rezultatis" Relationship="Self.FK_Rezultati_Kategorije" FromRole="Kategorije" ToRole="Rezultati" />
+          <NavigationProperty Name="Pitanja" Relationship="Self.FK_PovijestGrcka_Kategorije" FromRole="Kategorije" ToRole="Pitanja" />
+          <NavigationProperty Name="Rezultati" Relationship="Self.FK_Rezultati_Kategorije" FromRole="Kategorije" ToRole="Rezultati" />
         </EntityType>
-        <EntityType Name="OstvareniAchievemnti">
+        <EntityType Name="OstvareniAchievementi">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="AchievementID" />
@@ -226,8 +245,8 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="AchievementID" Type="Int32" Nullable="false" />
           <Property Name="AchivementOstvaren" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Achievement" Relationship="Self.FK_OstvareniAchievemnti_Achievements" FromRole="OstvareniAchievemnti" ToRole="Achievements" />
-          <NavigationProperty Name="UserInfo" Relationship="Self.FK_OstvareniAchievemnti_UserInfo" FromRole="OstvareniAchievemnti" ToRole="UserInfo" />
+          <NavigationProperty Name="Achievements" Relationship="Self.FK_OstvareniAchievementi_Achievements" FromRole="OstvareniAchievementi" ToRole="Achievements" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_OstvareniAchievementi_UserInfo" FromRole="OstvareniAchievementi" ToRole="UserInfo" />
         </EntityType>
         <EntityType Name="Pitanja">
           <Key>
@@ -250,7 +269,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           </Key>
           <Property Name="PredmetID" Type="Int32" Nullable="false" />
           <Property Name="PredmetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Kategorijes" Relationship="Self.FK_Kategorije_Predmeti" FromRole="Predmeti" ToRole="Kategorije" />
+          <NavigationProperty Name="Kategorije" Relationship="Self.FK_Kategorije_Predmeti" FromRole="Predmeti" ToRole="Kategorije" />
         </EntityType>
         <EntityType Name="Rezultati">
           <Key>
@@ -264,7 +283,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <NavigationProperty Name="Kategorije" Relationship="Self.FK_Rezultati_Kategorije" FromRole="Rezultati" ToRole="Kategorije" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_Rezultati_UserInfo" FromRole="Rezultati" ToRole="UserInfo" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -285,17 +304,30 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserType" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="OstvareniAchievemntis" Relationship="Self.FK_OstvareniAchievemnti_UserInfo" FromRole="UserInfo" ToRole="OstvareniAchievemnti" />
-          <NavigationProperty Name="Rezultatis" Relationship="Self.FK_Rezultati_UserInfo" FromRole="UserInfo" ToRole="Rezultati" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="OstvareniAchievementi" Relationship="Self.FK_OstvareniAchievementi_UserInfo" FromRole="UserInfo" ToRole="OstvareniAchievementi" />
+          <NavigationProperty Name="Rezultati" Relationship="Self.FK_Rezultati_UserInfo" FromRole="UserInfo" ToRole="Rezultati" />
         </EntityType>
-        <Association Name="FK_OstvareniAchievemnti_Achievements">
-          <End Role="Achievements" Type="Self.Achievement" Multiplicity="1" />
-          <End Role="OstvareniAchievemnti" Type="Self.OstvareniAchievemnti" Multiplicity="*" />
+        <Association Name="FK_Achievements_Achievements">
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="1" />
+          <End Role="Achievements1" Type="Self.Achievements" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Achievements">
               <PropertyRef Name="AchievementID" />
             </Principal>
-            <Dependent Role="OstvareniAchievemnti">
+            <Dependent Role="Achievements1">
+              <PropertyRef Name="AchievementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OstvareniAchievementi_Achievements">
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="1" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievements">
+              <PropertyRef Name="AchievementID" />
+            </Principal>
+            <Dependent Role="OstvareniAchievementi">
               <PropertyRef Name="AchievementID" />
             </Dependent>
           </ReferentialConstraint>
@@ -336,14 +368,14 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OstvareniAchievemnti_UserInfo">
+        <Association Name="FK_OstvareniAchievementi_UserInfo">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
-          <End Role="OstvareniAchievemnti" Type="Self.OstvareniAchievemnti" Multiplicity="*" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserInfo">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="OstvareniAchievemnti">
+            <Dependent Role="OstvareniAchievementi">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -360,38 +392,42 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProjektBazaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Achievements" EntityType="Self.Achievement" />
-          <EntitySet Name="Kategorijes" EntityType="Self.Kategorije" />
-          <EntitySet Name="OstvareniAchievemntis" EntityType="Self.OstvareniAchievemnti" />
-          <EntitySet Name="Pitanjas" EntityType="Self.Pitanja" />
-          <EntitySet Name="Predmetis" EntityType="Self.Predmeti" />
-          <EntitySet Name="Rezultatis" EntityType="Self.Rezultati" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
-          <AssociationSet Name="FK_OstvareniAchievemnti_Achievements" Association="Self.FK_OstvareniAchievemnti_Achievements">
+        <EntityContainer Name="BazaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Achievements" EntityType="Self.Achievements" />
+          <EntitySet Name="Kategorije" EntityType="Self.Kategorije" />
+          <EntitySet Name="OstvareniAchievementi" EntityType="Self.OstvareniAchievementi" />
+          <EntitySet Name="Pitanja" EntityType="Self.Pitanja" />
+          <EntitySet Name="Predmeti" EntityType="Self.Predmeti" />
+          <EntitySet Name="Rezultati" EntityType="Self.Rezultati" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK_Achievements_Achievements" Association="Self.FK_Achievements_Achievements">
             <End Role="Achievements" EntitySet="Achievements" />
-            <End Role="OstvareniAchievemnti" EntitySet="OstvareniAchievemntis" />
+            <End Role="Achievements1" EntitySet="Achievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OstvareniAchievementi_Achievements" Association="Self.FK_OstvareniAchievementi_Achievements">
+            <End Role="Achievements" EntitySet="Achievements" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
           </AssociationSet>
           <AssociationSet Name="FK_Kategorije_Predmeti" Association="Self.FK_Kategorije_Predmeti">
-            <End Role="Predmeti" EntitySet="Predmetis" />
-            <End Role="Kategorije" EntitySet="Kategorijes" />
+            <End Role="Predmeti" EntitySet="Predmeti" />
+            <End Role="Kategorije" EntitySet="Kategorije" />
           </AssociationSet>
           <AssociationSet Name="FK_PovijestGrcka_Kategorije" Association="Self.FK_PovijestGrcka_Kategorije">
-            <End Role="Kategorije" EntitySet="Kategorijes" />
-            <End Role="Pitanja" EntitySet="Pitanjas" />
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Pitanja" EntitySet="Pitanja" />
           </AssociationSet>
           <AssociationSet Name="FK_Rezultati_Kategorije" Association="Self.FK_Rezultati_Kategorije">
-            <End Role="Kategorije" EntitySet="Kategorijes" />
-            <End Role="Rezultati" EntitySet="Rezultatis" />
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Rezultati" EntitySet="Rezultati" />
           </AssociationSet>
-          <AssociationSet Name="FK_OstvareniAchievemnti_UserInfo" Association="Self.FK_OstvareniAchievemnti_UserInfo">
-            <End Role="UserInfo" EntitySet="UserInfoes" />
-            <End Role="OstvareniAchievemnti" EntitySet="OstvareniAchievemntis" />
+          <AssociationSet Name="FK_OstvareniAchievementi_UserInfo" Association="Self.FK_OstvareniAchievementi_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
           </AssociationSet>
           <AssociationSet Name="FK_Rezultati_UserInfo" Association="Self.FK_Rezultati_UserInfo">
-            <End Role="UserInfo" EntitySet="UserInfoes" />
-            <End Role="Rezultati" EntitySet="Rezultatis" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Rezultati" EntitySet="Rezultati" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -399,9 +435,9 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjektBazaModelStoreContainer" CdmEntityContainer="ProjektBazaEntities">
+        <EntityContainerMapping StorageEntityContainer="ProjektBazaModelStoreContainer" CdmEntityContainer="BazaEntities">
           <EntitySetMapping Name="Achievements">
-            <EntityTypeMapping TypeName="ProjektBazaModel.Achievement">
+            <EntityTypeMapping TypeName="ProjektBazaModel.Achievements">
               <MappingFragment StoreEntitySet="Achievements">
                 <ScalarProperty Name="AchievementID" ColumnName="AchievementID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -410,7 +446,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Kategorijes">
+          <EntitySetMapping Name="Kategorije">
             <EntityTypeMapping TypeName="ProjektBazaModel.Kategorije">
               <MappingFragment StoreEntitySet="Kategorije">
                 <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
@@ -419,16 +455,16 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OstvareniAchievemntis">
-            <EntityTypeMapping TypeName="ProjektBazaModel.OstvareniAchievemnti">
-              <MappingFragment StoreEntitySet="OstvareniAchievemnti">
+          <EntitySetMapping Name="OstvareniAchievementi">
+            <EntityTypeMapping TypeName="ProjektBazaModel.OstvareniAchievementi">
+              <MappingFragment StoreEntitySet="OstvareniAchievementi">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="AchievementID" ColumnName="AchievementID" />
                 <ScalarProperty Name="AchivementOstvaren" ColumnName="AchivementOstvaren" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Pitanjas">
+          <EntitySetMapping Name="Pitanja">
             <EntityTypeMapping TypeName="ProjektBazaModel.Pitanja">
               <MappingFragment StoreEntitySet="Pitanja">
                 <ScalarProperty Name="PitanjeID" ColumnName="PitanjeID" />
@@ -443,7 +479,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Predmetis">
+          <EntitySetMapping Name="Predmeti">
             <EntityTypeMapping TypeName="ProjektBazaModel.Predmeti">
               <MappingFragment StoreEntitySet="Predmeti">
                 <ScalarProperty Name="PredmetID" ColumnName="PredmetID" />
@@ -451,7 +487,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rezultatis">
+          <EntitySetMapping Name="Rezultati">
             <EntityTypeMapping TypeName="ProjektBazaModel.Rezultati">
               <MappingFragment StoreEntitySet="Rezultati">
                 <ScalarProperty Name="RezultatID" ColumnName="RezultatID" />
@@ -463,7 +499,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ProjektBazaModel.sysdiagram">
+            <EntityTypeMapping TypeName="ProjektBazaModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -473,7 +509,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserInfoes">
+          <EntitySetMapping Name="UserInfo">
             <EntityTypeMapping TypeName="ProjektBazaModel.UserInfo">
               <MappingFragment StoreEntitySet="UserInfo">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -483,6 +519,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -500,7 +537,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

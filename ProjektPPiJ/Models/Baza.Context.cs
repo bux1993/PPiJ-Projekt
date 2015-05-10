@@ -13,10 +13,10 @@ namespace ProjektPPiJ.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProjektBazaEntities : DbContext
+    public partial class BazaEntities : DbContext
     {
-        public ProjektBazaEntities()
-            : base("name=ProjektBazaEntities")
+        public BazaEntities()
+            : base("name=BazaEntities")
         {
         }
     
@@ -25,13 +25,13 @@ namespace ProjektPPiJ.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Achievement> Achievements { get; set; }
-        public virtual DbSet<Kategorije> Kategorijes { get; set; }
-        public virtual DbSet<OstvareniAchievemnti> OstvareniAchievemntis { get; set; }
-        public virtual DbSet<Pitanja> Pitanjas { get; set; }
-        public virtual DbSet<Predmeti> Predmetis { get; set; }
-        public virtual DbSet<Rezultati> Rezultatis { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<UserInfo> UserInfoes { get; set; }
+        public virtual DbSet<Achievements> Achievements { get; set; }
+        public virtual DbSet<Kategorije> Kategorije { get; set; }
+        public virtual DbSet<OstvareniAchievementi> OstvareniAchievementi { get; set; }
+        public virtual DbSet<Pitanja> Pitanja { get; set; }
+        public virtual DbSet<Predmeti> Predmeti { get; set; }
+        public virtual DbSet<Rezultati> Rezultati { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
     }
 }
