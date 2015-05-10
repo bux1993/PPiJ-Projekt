@@ -1,0 +1,82 @@
+﻿@model ProjektPPiJ.Models.Pitanja
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pitanja</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VrstaPitanja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VrstaPitanja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pitanje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pitanje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TocanOdgovor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TocanOdgovor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KriviOdgovor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KriviOdgovor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KriviOdgovor2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KriviOdgovor2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KriviOdgovor3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KriviOdgovor3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slika)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slika)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategorije.KategorijaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategorije.KategorijaName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PitanjeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,50 @@
+﻿@model ProjektPPiJ.Models.Rezultati
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rezultati</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NajboljiRezultat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NajboljiRezultat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZadnjiRezultat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZadnjiRezultat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategorije.KategorijaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategorije.KategorijaName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserInfo.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserInfo.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RezultatID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

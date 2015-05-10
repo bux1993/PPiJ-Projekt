@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjektPPiJ.Models.Rezultati>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NajboljiRezultat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZadnjiRezultat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategorije.KategorijaName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserInfo.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NajboljiRezultat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZadnjiRezultat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategorije.KategorijaName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserInfo.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RezultatID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RezultatID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RezultatID })
+        </td>
+    </tr>
+}
+
+</table>
