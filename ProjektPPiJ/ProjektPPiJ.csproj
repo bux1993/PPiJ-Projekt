@@ -181,6 +181,7 @@
     <Compile Include="Controllers\PredmetiController.cs" />
     <Compile Include="Controllers\RezultatiController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
+    <Compile Include="Controllers\VrstaPitanjaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,6 +224,9 @@
       <DependentUpon>Baza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserInfo.cs">
+      <DependentUpon>Baza.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VrstaPitanja.cs">
       <DependentUpon>Baza.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -326,26 +330,31 @@
     <Content Include="Views\Kategorije\Details.cshtml" />
     <Content Include="Views\Kategorije\Edit.cshtml" />
     <Content Include="Views\Kategorije\Index.cshtml" />
-    <Content Include="Views\Predmeti\Create.cshtml" />
-    <Content Include="Views\Predmeti\Delete.cshtml" />
-    <Content Include="Views\Predmeti\Details.cshtml" />
-    <Content Include="Views\Predmeti\Edit.cshtml" />
-    <Content Include="Views\Predmeti\Index.cshtml" />
     <Content Include="Views\Rezultati\Create.cshtml" />
     <Content Include="Views\Rezultati\Delete.cshtml" />
     <Content Include="Views\Rezultati\Details.cshtml" />
     <Content Include="Views\Rezultati\Edit.cshtml" />
     <Content Include="Views\Rezultati\Index.cshtml" />
-    <Content Include="Views\Pitanja\Create.cshtml" />
-    <Content Include="Views\Pitanja\Delete.cshtml" />
-    <Content Include="Views\Pitanja\Details.cshtml" />
-    <Content Include="Views\Pitanja\Edit.cshtml" />
-    <Content Include="Views\Pitanja\Index.cshtml" />
     <Content Include="Views\Achievements\Create.cshtml" />
     <Content Include="Views\Achievements\Delete.cshtml" />
     <Content Include="Views\Achievements\Details.cshtml" />
     <Content Include="Views\Achievements\Edit.cshtml" />
     <Content Include="Views\Achievements\Index.cshtml" />
+    <Content Include="Views\Pitanja\Create.cshtml" />
+    <Content Include="Views\Pitanja\Delete.cshtml" />
+    <Content Include="Views\Pitanja\Details.cshtml" />
+    <Content Include="Views\Pitanja\Edit.cshtml" />
+    <Content Include="Views\Pitanja\Index.cshtml" />
+    <Content Include="Views\VrstaPitanja\Create.cshtml" />
+    <Content Include="Views\VrstaPitanja\Delete.cshtml" />
+    <Content Include="Views\VrstaPitanja\Details.cshtml" />
+    <Content Include="Views\VrstaPitanja\Edit.cshtml" />
+    <Content Include="Views\VrstaPitanja\Index.cshtml" />
+    <Content Include="Views\Predmeti\Create.cshtml" />
+    <Content Include="Views\Predmeti\Delete.cshtml" />
+    <Content Include="Views\Predmeti\Details.cshtml" />
+    <Content Include="Views\Predmeti\Edit.cshtml" />
+    <Content Include="Views\Predmeti\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

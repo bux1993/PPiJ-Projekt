@@ -25,5 +25,6 @@ namespace ProjektPPiJ.Models
         public byte[] Slika { get; set; }
     
         public virtual Kategorije Kategorije { get; set; }
+        public virtual VrstaPitanja VrstaPitanja1 { get; set; }
     }
 }

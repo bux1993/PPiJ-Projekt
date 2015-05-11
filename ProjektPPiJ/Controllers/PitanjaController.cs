@@ -18,7 +18,7 @@ namespace ProjektPPiJ.Controllers
         // GET: Pitanja
         public async Task<ActionResult> Index()
         {
-            var pitanja = db.Pitanja.Include(p => p.Kategorije);
+            var pitanja = db.Pitanja.Include(p => p.Kategorije).Include(p => p.VrstaPitanja1);
             return View(await pitanja.ToListAsync());
         }
 
@@ -41,6 +41,7 @@ namespace ProjektPPiJ.Controllers
         public ActionResult Create()
         {
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName");
+            ViewBag.VrstaPitanja = new SelectList(db.VrstaPitanja, "VrstaPitanjaID", "VrstaPitanja1");
             return View();
         }
 
@@ -59,6 +60,7 @@ namespace ProjektPPiJ.Controllers
             }
 
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName", pitanja.KategorijaID);
+            ViewBag.VrstaPitanja = new SelectList(db.VrstaPitanja, "VrstaPitanjaID", "VrstaPitanja1", pitanja.VrstaPitanja);
             return View(pitanja);
         }
 
@@ -75,6 +77,7 @@ namespace ProjektPPiJ.Controllers
                 return HttpNotFound();
             }
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName", pitanja.KategorijaID);
+            ViewBag.VrstaPitanja = new SelectList(db.VrstaPitanja, "VrstaPitanjaID", "VrstaPitanja1", pitanja.VrstaPitanja);
             return View(pitanja);
         }
 
@@ -92,6 +95,7 @@ namespace ProjektPPiJ.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName", pitanja.KategorijaID);
+            ViewBag.VrstaPitanja = new SelectList(db.VrstaPitanja, "VrstaPitanjaID", "VrstaPitanja1", pitanja.VrstaPitanja);
             return View(pitanja);
         }
 

@@ -18,8 +18,7 @@ namespace ProjektPPiJ.Controllers
         // GET: Achievements
         public async Task<ActionResult> Index()
         {
-            var achievements = db.Achievements.Include(a => a.Achievements1).Include(a => a.Achievements2);
-            return View(await achievements.ToListAsync());
+            return View(await db.Achievements.ToListAsync());
         }
 
         // GET: Achievements/Details/5
@@ -40,8 +39,6 @@ namespace ProjektPPiJ.Controllers
         // GET: Achievements/Create
         public ActionResult Create()
         {
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name");
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name");
             return View();
         }
 
@@ -59,8 +56,6 @@ namespace ProjektPPiJ.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", achievements.AchievementID);
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", achievements.AchievementID);
             return View(achievements);
         }
 
@@ -76,8 +71,6 @@ namespace ProjektPPiJ.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", achievements.AchievementID);
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", achievements.AchievementID);
             return View(achievements);
         }
 
@@ -94,8 +87,6 @@ namespace ProjektPPiJ.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", achievements.AchievementID);
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", achievements.AchievementID);
             return View(achievements);
         }
 

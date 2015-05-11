@@ -33,5 +33,6 @@ namespace ProjektPPiJ.Models
         public virtual DbSet<Rezultati> Rezultati { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<VrstaPitanja> VrstaPitanja { get; set; }
     }
 }

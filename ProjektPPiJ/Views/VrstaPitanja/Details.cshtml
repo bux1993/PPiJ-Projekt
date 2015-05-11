@@ -1,0 +1,26 @@
+﻿@model ProjektPPiJ.Models.VrstaPitanja
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VrstaPitanja</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VrstaPitanja1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VrstaPitanja1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VrstaPitanjaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
