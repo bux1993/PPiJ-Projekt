@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjektBazaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Achievements">
+          <Key>
+            <PropertyRef Name="AchievementID" />
+          </Key>
+          <Property Name="AchievementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Poruka" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Slika" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorije">
+          <Key>
+            <PropertyRef Name="KategorijaID" />
+          </Key>
+          <Property Name="KategorijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PredmetID" Type="int" Nullable="false" />
+          <Property Name="KategorijaName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OstvareniAchievementi">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="AchievementID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="AchievementID" Type="int" Nullable="false" />
+          <Property Name="AchivementOstvaren" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'TocanPoredak' in the table 'C:\USERS\NIKOLAB\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\PROJEKTPPIJ\PROJEKTPPIJ\APP_DATA\PROJEKTBAZA.MDF.dbo.Pitanja' was excluded.-->
+        <EntityType Name="Pitanja">
+          <Key>
+            <PropertyRef Name="PitanjeID" />
+          </Key>
+          <Property Name="PitanjeID" Type="int" Nullable="false" />
+          <Property Name="KategorijaID" Type="int" Nullable="false" />
+          <Property Name="VrstaPitanja" Type="smallint" Nullable="false" />
+          <Property Name="Pitanje" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TocanOdgovor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KriviOdgovor" Type="nvarchar" MaxLength="50" />
+          <Property Name="KriviOdgovor2" Type="nvarchar" MaxLength="50" />
+          <Property Name="KriviOdgovor3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Slika" Type="image" />
+        </EntityType>
+        <EntityType Name="Predmeti">
+          <Key>
+            <PropertyRef Name="PredmetID" />
+          </Key>
+          <Property Name="PredmetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PredmetName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezultati">
+          <Key>
+            <PropertyRef Name="RezultatID" />
+          </Key>
+          <Property Name="RezultatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="KategorijaID" Type="int" Nullable="false" />
+          <Property Name="NajboljiRezultat" Type="int" Nullable="false" />
+          <Property Name="ZadnjiRezultat" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserType" Type="bit" Nullable="false" />
+          <Property Name="Picture" Type="image" />
+        </EntityType>
+        <EntityType Name="VrstaPitanja">
+          <Key>
+            <PropertyRef Name="VrstaPitanjaID" />
+          </Key>
+          <Property Name="VrstaPitanjaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VrstaPitanja" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Kategorije_Predmeti">
+          <End Role="Predmeti" Type="Self.Predmeti" Multiplicity="1" />
+          <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predmeti">
+              <PropertyRef Name="PredmetID" />
+            </Principal>
+            <Dependent Role="Kategorije">
+              <PropertyRef Name="PredmetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OstvareniAchievementi_Achievements1">
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="1" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievements">
+              <PropertyRef Name="AchievementID" />
+            </Principal>
+            <Dependent Role="OstvareniAchievementi">
+              <PropertyRef Name="AchievementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OstvareniAchievementi_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OstvareniAchievementi">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pitanja_VrstaPitanja">
+          <End Role="VrstaPitanja" Type="Self.VrstaPitanja" Multiplicity="1" />
+          <End Role="Pitanja" Type="Self.Pitanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VrstaPitanja">
+              <PropertyRef Name="VrstaPitanjaID" />
+            </Principal>
+            <Dependent Role="Pitanja">
+              <PropertyRef Name="VrstaPitanja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PovijestGrcka_Kategorije">
+          <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="1" />
+          <End Role="Pitanja" Type="Self.Pitanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorije">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Pitanja">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezultati_Kategorije">
+          <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="1" />
+          <End Role="Rezultati" Type="Self.Rezultati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorije">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Rezultati">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezultati_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Rezultati" Type="Self.Rezultati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rezultati">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjektBazaModelStoreContainer">
+          <EntitySet Name="Achievements" EntityType="Self.Achievements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorije" EntityType="Self.Kategorije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OstvareniAchievementi" EntityType="Self.OstvareniAchievementi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pitanja" EntityType="Self.Pitanja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Predmeti" EntityType="Self.Predmeti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezultati" EntityType="Self.Rezultati" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VrstaPitanja" EntityType="Self.VrstaPitanja" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kategorije_Predmeti" Association="Self.FK_Kategorije_Predmeti">
+            <End Role="Predmeti" EntitySet="Predmeti" />
+            <End Role="Kategorije" EntitySet="Kategorije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OstvareniAchievementi_Achievements1" Association="Self.FK_OstvareniAchievementi_Achievements1">
+            <End Role="Achievements" EntitySet="Achievements" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OstvareniAchievementi_UserInfo1" Association="Self.FK_OstvareniAchievementi_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pitanja_VrstaPitanja" Association="Self.FK_Pitanja_VrstaPitanja">
+            <End Role="VrstaPitanja" EntitySet="VrstaPitanja" />
+            <End Role="Pitanja" EntitySet="Pitanja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PovijestGrcka_Kategorije" Association="Self.FK_PovijestGrcka_Kategorije">
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Pitanja" EntitySet="Pitanja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezultati_Kategorije" Association="Self.FK_Rezultati_Kategorije">
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Rezultati" EntitySet="Rezultati" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezultati_UserInfo" Association="Self.FK_Rezultati_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Rezultati" EntitySet="Rezultati" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjektBazaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Achievements">
+          <Key>
+            <PropertyRef Name="AchievementID" />
+          </Key>
+          <Property Name="AchievementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Poruka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="OstvareniAchievementi" Relationship="Self.FK_OstvareniAchievementi_Achievements" FromRole="Achievements" ToRole="OstvareniAchievementi" />
+        </EntityType>
+        <EntityType Name="Kategorije">
+          <Key>
+            <PropertyRef Name="KategorijaID" />
+          </Key>
+          <Property Name="KategorijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PredmetID" Type="Int32" Nullable="false" />
+          <Property Name="KategorijaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Predmeti" Relationship="Self.FK_Kategorije_Predmeti" FromRole="Kategorije" ToRole="Predmeti" />
+          <NavigationProperty Name="Pitanja" Relationship="Self.FK_PovijestGrcka_Kategorije" FromRole="Kategorije" ToRole="Pitanja" />
+          <NavigationProperty Name="Rezultati" Relationship="Self.FK_Rezultati_Kategorije" FromRole="Kategorije" ToRole="Rezultati" />
+        </EntityType>
+        <EntityType Name="OstvareniAchievementi">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="AchievementID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="AchievementID" Type="Int32" Nullable="false" />
+          <Property Name="AchivementOstvaren" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Achievements" Relationship="Self.FK_OstvareniAchievementi_Achievements" FromRole="OstvareniAchievementi" ToRole="Achievements" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_OstvareniAchievementi_UserInfo" FromRole="OstvareniAchievementi" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Pitanja">
+          <Key>
+            <PropertyRef Name="PitanjeID" />
+          </Key>
+          <Property Name="PitanjeID" Type="Int32" Nullable="false" />
+          <Property Name="KategorijaID" Type="Int32" Nullable="false" />
+          <Property Name="VrstaPitanja" Type="Int16" Nullable="false" />
+          <Property Name="Pitanje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TocanOdgovor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KriviOdgovor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KriviOdgovor2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KriviOdgovor3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Kategorije" Relationship="Self.FK_PovijestGrcka_Kategorije" FromRole="Pitanja" ToRole="Kategorije" />
+          <NavigationProperty Name="VrstaPitanja1" Relationship="ProjektBazaModel.FK_Pitanja_VrstaPitanja" FromRole="Pitanja" ToRole="VrstaPitanja" />
+        </EntityType>
+        <EntityType Name="Predmeti">
+          <Key>
+            <PropertyRef Name="PredmetID" />
+          </Key>
+          <Property Name="PredmetID" Type="Int32" Nullable="false" />
+          <Property Name="PredmetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kategorije" Relationship="Self.FK_Kategorije_Predmeti" FromRole="Predmeti" ToRole="Kategorije" />
+        </EntityType>
+        <EntityType Name="Rezultati">
+          <Key>
+            <PropertyRef Name="RezultatID" />
+          </Key>
+          <Property Name="RezultatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="KategorijaID" Type="Int32" Nullable="false" />
+          <Property Name="NajboljiRezultat" Type="Int32" Nullable="false" />
+          <Property Name="ZadnjiRezultat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kategorije" Relationship="Self.FK_Rezultati_Kategorije" FromRole="Rezultati" ToRole="Kategorije" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_Rezultati_UserInfo" FromRole="Rezultati" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserType" Type="Boolean" Nullable="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="OstvareniAchievementi" Relationship="Self.FK_OstvareniAchievementi_UserInfo" FromRole="UserInfo" ToRole="OstvareniAchievementi" />
+          <NavigationProperty Name="Rezultati" Relationship="Self.FK_Rezultati_UserInfo" FromRole="UserInfo" ToRole="Rezultati" />
+        </EntityType>
+        <Association Name="FK_OstvareniAchievementi_Achievements">
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="1" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievements">
+              <PropertyRef Name="AchievementID" />
+            </Principal>
+            <Dependent Role="OstvareniAchievementi">
+              <PropertyRef Name="AchievementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kategorije_Predmeti">
+          <End Role="Predmeti" Type="Self.Predmeti" Multiplicity="1" />
+          <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predmeti">
+              <PropertyRef Name="PredmetID" />
+            </Principal>
+            <Dependent Role="Kategorije">
+              <PropertyRef Name="PredmetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PovijestGrcka_Kategorije">
+          <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="1" />
+          <End Role="Pitanja" Type="Self.Pitanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorije">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Pitanja">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezultati_Kategorije">
+          <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="1" />
+          <End Role="Rezultati" Type="Self.Rezultati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorije">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Rezultati">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OstvareniAchievementi_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="OstvareniAchievementi" Type="Self.OstvareniAchievementi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OstvareniAchievementi">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezultati_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Rezultati" Type="Self.Rezultati" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rezultati">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BazaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Achievements" EntityType="Self.Achievements" />
+          <EntitySet Name="Kategorije" EntityType="Self.Kategorije" />
+          <EntitySet Name="OstvareniAchievementi" EntityType="Self.OstvareniAchievementi" />
+          <EntitySet Name="Pitanja" EntityType="Self.Pitanja" />
+          <EntitySet Name="Predmeti" EntityType="Self.Predmeti" />
+          <EntitySet Name="Rezultati" EntityType="Self.Rezultati" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK_OstvareniAchievementi_Achievements" Association="Self.FK_OstvareniAchievementi_Achievements">
+            <End Role="Achievements" EntitySet="Achievements" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kategorije_Predmeti" Association="Self.FK_Kategorije_Predmeti">
+            <End Role="Predmeti" EntitySet="Predmeti" />
+            <End Role="Kategorije" EntitySet="Kategorije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PovijestGrcka_Kategorije" Association="Self.FK_PovijestGrcka_Kategorije">
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Pitanja" EntitySet="Pitanja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezultati_Kategorije" Association="Self.FK_Rezultati_Kategorije">
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Rezultati" EntitySet="Rezultati" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OstvareniAchievementi_UserInfo" Association="Self.FK_OstvareniAchievementi_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="OstvareniAchievementi" EntitySet="OstvareniAchievementi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezultati_UserInfo" Association="Self.FK_Rezultati_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Rezultati" EntitySet="Rezultati" />
+          </AssociationSet>
+          <EntitySet Name="VrstaPitanja" EntityType="ProjektBazaModel.VrstaPitanja" />
+          <AssociationSet Name="FK_Pitanja_VrstaPitanja" Association="ProjektBazaModel.FK_Pitanja_VrstaPitanja">
+            <End Role="VrstaPitanja" EntitySet="VrstaPitanja" />
+            <End Role="Pitanja" EntitySet="Pitanja" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="VrstaPitanja">
+          <Key>
+            <PropertyRef Name="VrstaPitanjaID" />
+          </Key>
+          <Property Name="VrstaPitanjaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VrstaPitanja1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pitanja" Relationship="ProjektBazaModel.FK_Pitanja_VrstaPitanja" FromRole="VrstaPitanja" ToRole="Pitanja" />
+        </EntityType>
+        <Association Name="FK_Pitanja_VrstaPitanja">
+          <End Type="ProjektBazaModel.VrstaPitanja" Role="VrstaPitanja" Multiplicity="1" />
+          <End Type="ProjektBazaModel.Pitanja" Role="Pitanja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VrstaPitanja">
+              <PropertyRef Name="VrstaPitanjaID" />
+            </Principal>
+            <Dependent Role="Pitanja">
+              <PropertyRef Name="VrstaPitanja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjektBazaModelStoreContainer" CdmEntityContainer="BazaEntities">
+          <EntitySetMapping Name="Achievements">
+            <EntityTypeMapping TypeName="ProjektBazaModel.Achievements">
+              <MappingFragment StoreEntitySet="Achievements">
+                <ScalarProperty Name="AchievementID" ColumnName="AchievementID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Poruka" ColumnName="Poruka" />
+                <ScalarProperty Name="Slika" ColumnName="Slika" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategorije">
+            <EntityTypeMapping TypeName="ProjektBazaModel.Kategorije">
+              <MappingFragment StoreEntitySet="Kategorije">
+                <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
+                <ScalarProperty Name="PredmetID" ColumnName="PredmetID" />
+                <ScalarProperty Name="KategorijaName" ColumnName="KategorijaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OstvareniAchievementi">
+            <EntityTypeMapping TypeName="ProjektBazaModel.OstvareniAchievementi">
+              <MappingFragment StoreEntitySet="OstvareniAchievementi">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AchievementID" ColumnName="AchievementID" />
+                <ScalarProperty Name="AchivementOstvaren" ColumnName="AchivementOstvaren" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pitanja">
+            <EntityTypeMapping TypeName="ProjektBazaModel.Pitanja">
+              <MappingFragment StoreEntitySet="Pitanja">
+                <ScalarProperty Name="PitanjeID" ColumnName="PitanjeID" />
+                <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
+                <ScalarProperty Name="VrstaPitanja" ColumnName="VrstaPitanja" />
+                <ScalarProperty Name="Pitanje" ColumnName="Pitanje" />
+                <ScalarProperty Name="TocanOdgovor" ColumnName="TocanOdgovor" />
+                <ScalarProperty Name="KriviOdgovor" ColumnName="KriviOdgovor" />
+                <ScalarProperty Name="KriviOdgovor2" ColumnName="KriviOdgovor2" />
+                <ScalarProperty Name="KriviOdgovor3" ColumnName="KriviOdgovor3" />
+                <ScalarProperty Name="Slika" ColumnName="Slika" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Predmeti">
+            <EntityTypeMapping TypeName="ProjektBazaModel.Predmeti">
+              <MappingFragment StoreEntitySet="Predmeti">
+                <ScalarProperty Name="PredmetID" ColumnName="PredmetID" />
+                <ScalarProperty Name="PredmetName" ColumnName="PredmetName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezultati">
+            <EntityTypeMapping TypeName="ProjektBazaModel.Rezultati">
+              <MappingFragment StoreEntitySet="Rezultati">
+                <ScalarProperty Name="RezultatID" ColumnName="RezultatID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
+                <ScalarProperty Name="NajboljiRezultat" ColumnName="NajboljiRezultat" />
+                <ScalarProperty Name="ZadnjiRezultat" ColumnName="ZadnjiRezultat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjektBazaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="ProjektBazaModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VrstaPitanja">
+            <EntityTypeMapping TypeName="ProjektBazaModel.VrstaPitanja">
+              <MappingFragment StoreEntitySet="VrstaPitanja">
+                <ScalarProperty Name="VrstaPitanja1" ColumnName="VrstaPitanja" />
+                <ScalarProperty Name="VrstaPitanjaID" ColumnName="VrstaPitanjaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
