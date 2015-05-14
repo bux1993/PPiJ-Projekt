@@ -47,16 +47,16 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UserID,Username,Password,Name,LastName,Email,UserType,Picture")] UserInfo userInfo)
+        public async Task<ActionResult> Create(RegisterModel regModel)
         {
             if (ModelState.IsValid)
             {
-                db.UserInfo.Add(userInfo);
+                db.UserInfo.Add(regModel.toUserInfo());
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
 
-            return View(userInfo);
+            return View(regModel.toUserInfo());
         }
 
         // GET: UserInfo/Edit/5
