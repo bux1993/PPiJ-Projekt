@@ -18,6 +18,7 @@ namespace ProjektPPiJ.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private BazaEntities db = new BazaEntities();
 
         public AccountController()
         {
@@ -57,7 +58,7 @@ namespace ProjektPPiJ.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
+                var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -90,7 +91,7 @@ namespace ProjektPPiJ.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email, Name = model.Name, LastName = model.LastName, BirthDate = model.BirthDate };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -101,7 +102,10 @@ namespace ProjektPPiJ.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+               
+                    db.UserInfo.Add(model.toUserInfo());
+                    await db.SaveChangesAsync();
+               
                     return RedirectToAction("Index", "Home");
                 }
                 else

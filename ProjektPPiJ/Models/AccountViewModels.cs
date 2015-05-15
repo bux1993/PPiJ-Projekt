@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjektPPiJ.Models
 {
@@ -24,7 +25,6 @@ namespace ProjektPPiJ.Models
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
@@ -38,9 +38,8 @@ namespace ProjektPPiJ.Models
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -53,13 +52,17 @@ namespace ProjektPPiJ.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -68,6 +71,27 @@ namespace ProjektPPiJ.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "First Name")]
+        public string Name{ get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName{ get; set; }
+
+        [Display(Name = "Birthdate")]
+        public DateTime BirthDate { get; set; }
+
+
+        public UserInfo toUserInfo()
+        {
+            UserInfo ret = new UserInfo();
+            ret.Username = this.UserName;
+            ret.Password = this.Password;
+            ret.Name = this.Name;
+            ret.LastName = this.LastName;
+            ret.Email = this.Email;
+            return ret;
+        }
     }
 
     public class ResetPasswordViewModel
@@ -78,7 +102,6 @@ namespace ProjektPPiJ.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
