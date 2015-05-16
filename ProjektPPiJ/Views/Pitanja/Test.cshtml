@@ -30,21 +30,34 @@
         <div class="alert alert-dismissible alert-info">
             <div>@Html.DisplayFor(m => item.Pitanje)</div>
             <div>
+                <span>@Html.RadioButton("Odgovor", "Točno")</span>
                 <span>@Html.DisplayFor(m => item.TocanOdgovor)</span>
-                <span> @Html.CheckBox("Odgovor", false)</span>
             </div>
             <div>
+                <span>@Html.RadioButton("Odgovor", "Netočno")</span>
                 <span>@Html.DisplayFor(m => item.KriviOdgovor)</span>
-                <span> @Html.CheckBox("Odgovor2", false)</span>
             </div>
             <div>
+                <span>@Html.RadioButton("Odgovor", "Netočno")</span>
                 <span>@Html.DisplayFor(m => item.KriviOdgovor2)</span>
-                <span> @Html.CheckBox("Odgovor3", false)</span>
             </div>
             <div>
+                <span>@Html.RadioButton("Odgovor", "Netočno")</span>
                 <span>@Html.DisplayFor(m => item.KriviOdgovor3)</span>
-                <span> @Html.CheckBox("Odgovor4", false)</span>
             </div>
         </div>
+    }
+    else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Unos odgovora"))
+    {
+        <div class="alert alert-dismissible alert-info">
+            <div>@Html.DisplayFor(m => item.Pitanje)</div>
+            <div>
+                @Html.TextBox("Unos Odgovor")
+            </div>
+        </div>
+    }
+    else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Što je na slici"))
+    {
+
     }
 }
