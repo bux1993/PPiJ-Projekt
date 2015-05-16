@@ -129,5 +129,11 @@ namespace ProjektPPiJ.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult OdaberiKategoriju(int predmetID)
+        {
+            var kategorijeIzbor = db.Kategorije.Where(m => m.PredmetID.Equals(predmetID));
+            return View(kategorijeIzbor);
+        }
     }
 }

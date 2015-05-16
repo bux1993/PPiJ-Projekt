@@ -384,9 +384,11 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Login\RegistrationSuccessful.cshtml" />
     <Content Include="Views\Login\RegistrationFailed.cshtml" />
-    <Content Include="Views\CountDown.cshtml" />
     <Content Include="Views\CountDown\Index.cshtml" />
     <Content Include="Views\Pitanja\Test.cshtml" />
+    <Content Include="Views\Predmeti\OdaberiPredmet.cshtml" />
+    <Content Include="Views\Kategorije\OdaberiKategoriju.cshtml" />
+    <Content Include="Views\UserInfo\UserDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />

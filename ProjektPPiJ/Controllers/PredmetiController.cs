@@ -124,5 +124,10 @@ namespace ProjektPPiJ.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult OdaberiPredmet()
+        {
+            return View(db.Predmeti.ToList());
+        }
     }
 }

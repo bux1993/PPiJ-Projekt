@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ProjektPPiJ.Models.Kategorije>
+
+@{
+    ViewBag.Title = "OdaberiKategoriju";
+}
+
+<h2>OdaberiKategoriju</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KategorijaName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Predmeti.PredmetName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KategorijaName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Predmeti.PredmetName)
+        </td>
+        <td>
+            @Html.ActionLink("Započni ovaj test!", "Edit", new { id=item.KategorijaID }) 
+        </td>
+    </tr>
+}
+
+</table>
