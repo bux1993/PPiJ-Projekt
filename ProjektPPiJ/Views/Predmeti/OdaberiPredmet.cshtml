@@ -21,8 +21,8 @@
             @Html.DisplayFor(modelItem => item.PredmetName)
         </td>
         <td>
-            @Html.ActionLink("Odaberi željenu kategoriju", "~/Views/Kategorije/OdaberiKategoriju",
-            new { id = item.PredmetID }) 
+            @Html.ActionLink("Odaberi željenu kategoriju", "OdaberiKategoriju", "Kategorije",
+            new { id = item.PredmetID }, null) 
         </td>
     </tr>
 }

@@ -130,9 +130,13 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult OdaberiKategoriju(int predmetID)
+        public ActionResult OdaberiKategoriju(int? predmetID = 1)
         {
-            var kategorijeIzbor = db.Kategorije.Where(m => m.PredmetID.Equals(predmetID));
+            var kategorijeIzbor = db.Kategorije.Where(m => m.PredmetID == predmetID);
+            if (kategorijeIzbor == null || predmetID != 1)
+            {
+                HttpNotFound();
+            }
             return View(kategorijeIzbor);
         }
     }

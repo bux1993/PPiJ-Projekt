@@ -125,9 +125,14 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserDashboard(int userID = 5)
+        public ActionResult UserDashboard(int userID = 1014)
         {
-            return View(db.UserInfo.Find(userID));
+            UserInfo user = db.UserInfo.Find(userID);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ProjektPPiJ.Models.Kategorije>
 
 @{
-    ViewBag.Title = "OdaberiKategoriju";
+    ViewBag.Title = "Odaberi Kategoriju";
 }
 
-<h2>OdaberiKategoriju</h2>
+<h2>Odaberi Kategoriju</h2>
 
 
 <table class="table">
@@ -27,7 +27,7 @@
             @Html.DisplayFor(modelItem => item.Predmeti.PredmetName)
         </td>
         <td>
-            @Html.ActionLink("Započni ovaj test!", "Edit", new { id=item.KategorijaID }) 
+            @Html.ActionLink("Započni ovaj test!", "Test", "Pitanja", new { id=item.KategorijaID }, null) 
         </td>
     </tr>
 }

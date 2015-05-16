@@ -134,7 +134,7 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Test(int kategorijaID)
+        public ActionResult Test(int? kategorijaID)
         {
             var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID);
             List<Pitanja> listaPitanja = new List<Pitanja>();
