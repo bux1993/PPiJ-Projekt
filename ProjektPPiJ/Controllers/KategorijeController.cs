@@ -130,10 +130,10 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult OdaberiKategoriju(int? predmetID = 1)
+        public async Task<ActionResult> OdaberiKategoriju(int? predmetID = 1)
         {
-            var kategorijeIzbor = db.Kategorije.Where(m => m.PredmetID == predmetID);
-            if (kategorijeIzbor == null || predmetID != 1)
+            var kategorijeIzbor =  await db.Kategorije.Where(m => m.PredmetID == predmetID).ToListAsync();
+            if (kategorijeIzbor == null)
             {
                 HttpNotFound();
             }

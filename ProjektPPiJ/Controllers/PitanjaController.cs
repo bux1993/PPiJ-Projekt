@@ -134,16 +134,16 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Test(int? kategorijaID)
+        public ActionResult Test(int? kategorijaID = 1)
         {
-            var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID);
+            var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
             List<Pitanja> listaPitanja = new List<Pitanja>();
             Random random = new Random();
             List<int> nadenaPitanja = new List<int>();
-            while (true)
+            while (pitanjaTest.Count > 0)
             {
-                int pitanje = random.Next();
-                if (!nadenaPitanja.Contains(pitanje))
+                int pitanje = random.Next() % pitanjaTest.Count;
+                if (!nadenaPitanja.Contains(pitanje) && pitanjaTest.Count > pitanje)
                 {
                     listaPitanja.Add(pitanjaTest.ElementAt(pitanje));
                 }

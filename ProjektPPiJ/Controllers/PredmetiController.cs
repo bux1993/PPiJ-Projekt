@@ -125,9 +125,9 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult OdaberiPredmet()
+        public async  Task<ActionResult> OdaberiPredmet()
         {
-            return View(db.Predmeti.ToList());
+            return View( await db.Predmeti.ToListAsync());
         }
     }
 }
