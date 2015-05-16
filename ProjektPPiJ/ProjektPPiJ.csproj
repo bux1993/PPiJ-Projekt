@@ -386,6 +386,7 @@
     <Content Include="Views\Login\RegistrationFailed.cshtml" />
     <Content Include="Views\CountDown.cshtml" />
     <Content Include="Views\CountDown\Index.cshtml" />
+    <Content Include="Views\Pitanja\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />

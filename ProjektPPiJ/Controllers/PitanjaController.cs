@@ -133,5 +133,26 @@ namespace ProjektPPiJ.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Test(int kategorijaID)
+        {
+            var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID);
+            List<Pitanja> listaPitanja = new List<Pitanja>();
+            Random random = new Random();
+            List<int> nadenaPitanja = new List<int>();
+            while (true)
+            {
+                int pitanje = random.Next();
+                if (!nadenaPitanja.Contains(pitanje))
+                {
+                    listaPitanja.Add(pitanjaTest.ElementAt(pitanje));
+                }
+                if (listaPitanja.Count == 10 || nadenaPitanja.Count == pitanje)
+                {
+                    break;
+                }
+            }
+            return View(listaPitanja);
+        }
     }
 }
