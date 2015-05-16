@@ -48,7 +48,8 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "AchievementID,Name,Poruka,Slika")] Achievements achievements)
+        public async Task<ActionResult> Create([Bind(Include = "AchievementID,Name,Poruka,Slika")] 
+            Achievements achievements)
         {
             if (ModelState.IsValid)
             {
