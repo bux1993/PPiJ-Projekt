@@ -4,7 +4,10 @@
     ViewBag.Title = "User " + Html.DisplayFor(m => m.Username);
 }
 
-<h2>Dobro došao na svoju radnu površinu</h2>
+<h2>
+    Dobro došao na svoju radnu površinu
+    @Html.ActionLink("Odaberi kviz", "OdaberiPredmet", "Predmeti", null, new { @class = "btn btn-primary pull-right" })
+</h2>
 
 <div>
     <hr />
