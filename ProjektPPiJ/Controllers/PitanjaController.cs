@@ -159,5 +159,10 @@ namespace ProjektPPiJ.Controllers
             }
             return View(listaPitanja);
         }
+
+        public ActionResult Talijan()
+        {
+            return View();
+        }
     }
 }
