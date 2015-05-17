@@ -228,6 +228,7 @@
       <DependentUpon>Baza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModels.cs" />
+    <Compile Include="Models\Odgovori.cs" />
     <Compile Include="Models\OstvareniAchievementi.cs">
       <DependentUpon>Baza.tt</DependentUpon>
     </Compile>

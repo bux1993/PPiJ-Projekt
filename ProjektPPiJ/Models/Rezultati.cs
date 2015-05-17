@@ -11,13 +11,18 @@ namespace ProjektPPiJ.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Rezultati
     {
         public int RezultatID { get; set; }
         public int UserID { get; set; }
         public int KategorijaID { get; set; }
+
+        [Display(Name = "Najbolji rezultat")]
         public int NajboljiRezultat { get; set; }
+
+        [Display(Name = "Zadnji rezultat")]
         public int ZadnjiRezultat { get; set; }
     
         public virtual Kategorije Kategorije { get; set; }

@@ -21,68 +21,67 @@
     });
 </script>
 
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            if (item.VrstaPitanja1.VrstaPitanja1.Equals("Ponuđeni odgovori"))
+            {
+                <div class="alert alert-dismissible alert-info">
+                    <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                    <div>
+                        <span>@Html.RadioButton("Odgovor", "Točno")</span>
+                        <span>@Html.DisplayFor(m => item.TocanOdgovor)</span>
+                    </div>
+                    <div>
+                        <span>@Html.RadioButton("Odgovor", "Netočno")</span>
+                        <span>@Html.DisplayFor(m => item.KriviOdgovor)</span>
+                    </div>
+                    <div>
+                        <span>@Html.RadioButton("Odgovor", "Netočno")</span>
+                        <span>@Html.DisplayFor(m => item.KriviOdgovor2)</span>
+                    </div>
+                    <div>
+                        <span>@Html.RadioButton("Odgovor", "Netočno")</span>
+                        <span>@Html.DisplayFor(m => item.KriviOdgovor3)</span>
+                    </div>
+                </div>
+            }
+            else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Unos odgovora"))
+            {
+                <div class="alert alert-dismissible alert-info">
+                    <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                    <div>
+                        @Html.TextBox("Unos Odgovor")
+                    </div>
+                </div>
+            }
+            else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Što je na slici"))
+            {
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        if (item.VrstaPitanja1.VrstaPitanja1.Equals("Ponuđeni odgovori"))
-        {
-            <div class="alert alert-dismissible alert-info">
-                <div>@Html.DisplayFor(m => item.Pitanje)</div>
-                <div>
-                    <span>@Html.RadioButton("Odgovor", "Točno")</span>
-                    <span>@Html.DisplayFor(m => item.TocanOdgovor)</span>
+            }
+            else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Više točnih"))
+            {
+                <div class="alert alert-dismissible alert-info">
+                    <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                    <div>
+                        <span>@Html.CheckBox("Odgovor", "Točno")</span>
+                        <span>@Html.DisplayFor(m => item.TocanOdgovor)</span>
+                    </div>
+                    <div>
+                        <span>@Html.CheckBox("Odgovor", "Točno")</span>
+                        <span>@Html.DisplayFor(m => item.KriviOdgovor)</span>
+                    </div>
+                    <div>
+                        <span>@Html.CheckBox("Odgovor", "Netočno")</span>
+                        <span>@Html.DisplayFor(m => item.KriviOdgovor2)</span>
+                    </div>
+                    <div>
+                        <span>@Html.CheckBox("Odgovor", "Netočno")</span>
+                        <span>@Html.DisplayFor(m => item.KriviOdgovor3)</span>
+                    </div>
                 </div>
-                <div>
-                    <span>@Html.RadioButton("Odgovor", "Netočno")</span>
-                    <span>@Html.DisplayFor(m => item.KriviOdgovor)</span>
-                </div>
-                <div>
-                    <span>@Html.RadioButton("Odgovor", "Netočno")</span>
-                    <span>@Html.DisplayFor(m => item.KriviOdgovor2)</span>
-                </div>
-                <div>
-                    <span>@Html.RadioButton("Odgovor", "Netočno")</span>
-                    <span>@Html.DisplayFor(m => item.KriviOdgovor3)</span>
-                </div>
-            </div>
-        }
-        else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Unos odgovora"))
-        {
-            <div class="alert alert-dismissible alert-info">
-                <div>@Html.DisplayFor(m => item.Pitanje)</div>
-                <div>
-                    @Html.TextBox("Unos Odgovor")
-                </div>
-            </div>
-        }
-        else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Što je na slici"))
-        {
-
-        }
-        else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Više točnih"))
-        {
-            <div class="alert alert-dismissible alert-info">
-                <div>@Html.DisplayFor(m => item.Pitanje)</div>
-                <div>
-                    <span>@Html.CheckBox("Odgovor", "Točno")</span>
-                    <span>@Html.DisplayFor(m => item.TocanOdgovor)</span>
-                </div>
-                <div>
-                    <span>@Html.CheckBox("Odgovor", "Točno")</span>
-                    <span>@Html.DisplayFor(m => item.KriviOdgovor)</span>
-                </div>
-                <div>
-                    <span>@Html.CheckBox("Odgovor", "Netočno")</span>
-                    <span>@Html.DisplayFor(m => item.KriviOdgovor2)</span>
-                </div>
-                <div>
-                    <span>@Html.CheckBox("Odgovor", "Netočno")</span>
-                    <span>@Html.DisplayFor(m => item.KriviOdgovor3)</span>
-                </div>
-            </div>
-        }
-    }
+            }
+        }    
     <div class="pull-right">
         @Html.ActionLink("Provjeri rješenja", "Talijan", null, new { @class = "btn btn-primary" })
         @Html.ActionLink("Predajem se", "Talijan", null, new {@class = "btn btn-warning btn-sm"})

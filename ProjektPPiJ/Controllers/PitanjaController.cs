@@ -135,12 +135,12 @@ namespace ProjektPPiJ.Controllers
         }
 
         public ActionResult Test(int? kategorijaID = 1)
-        {
-            if (kategorijaID == null)
+        {   
+            var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
+            if (pitanjaTest.Count == 0)
             {
                 return View("../Shared/Nedostupno");
-            }
-            var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
+            } 
             List<Pitanja> listaPitanja = new List<Pitanja>();
             Random random = new Random();
             List<int> nadenaPitanja = new List<int>();
@@ -161,6 +161,20 @@ namespace ProjektPPiJ.Controllers
         }
 
         public ActionResult Talijan()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryTokenAttribute]
+        public ActionResult Test()
+        {
+
+            return RedirectToAction("Provjereno");
+        }
+
+        public ActionResult Provjereno()
         {
             return View();
         }
