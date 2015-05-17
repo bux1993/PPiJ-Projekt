@@ -263,6 +263,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CheckBoxRadioButton.css" />
     <Content Include="Content\CountDown.css" />
+    <Content Include="Content\jigsaw-puppet.png" />
     <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-noscript.css" />
     <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui-noscript.css" />
     <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui.css" />

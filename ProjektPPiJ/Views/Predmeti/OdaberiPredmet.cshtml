@@ -28,3 +28,14 @@
 }
 
 </table>
+@foreach (var item in Model)
+{
+    <div class="alert alert-dismissible alert-success col-sm-3 ">
+        <div>@Html.DisplayFor(m => item.PredmetName)</div>
+        <div >
+            @Html.ActionLink("Odaberi željenu kategoriju", "OdaberiKategoriju", "Kategorije",
+            new { id = item.PredmetID }, new {@class="btn btn-link" })
+    </div>
+</div>
+    <div class="col-sm-1"></div>
+}
