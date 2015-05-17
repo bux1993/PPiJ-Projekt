@@ -136,6 +136,10 @@ namespace ProjektPPiJ.Controllers
 
         public ActionResult Test(int? kategorijaID = 1)
         {
+            if (kategorijaID == null)
+            {
+                return View("../Shared/Nedostupno");
+            }
             var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
             List<Pitanja> listaPitanja = new List<Pitanja>();
             Random random = new Random();
@@ -145,9 +149,10 @@ namespace ProjektPPiJ.Controllers
                 int pitanje = random.Next() % pitanjaTest.Count;
                 if (!nadenaPitanja.Contains(pitanje) && pitanjaTest.Count > pitanje)
                 {
+                    nadenaPitanja.Add(pitanje);
                     listaPitanja.Add(pitanjaTest.ElementAt(pitanje));
                 }
-                if (listaPitanja.Count == 10 || nadenaPitanja.Count == pitanje)
+                if (listaPitanja.Count == 10 || nadenaPitanja.Count == pitanjaTest.Count)
                 {
                     break;
                 }

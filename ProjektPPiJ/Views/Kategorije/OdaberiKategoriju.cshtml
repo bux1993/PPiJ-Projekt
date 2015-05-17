@@ -15,7 +15,7 @@
                 @Html.DisplayFor(m => item.KategorijaName)
             </div>
             <div>
-                @Html.ActionLink("Započni ovaj test!", "Test", "Pitanja", new { id = item.KategorijaID },
+                @Html.ActionLink("Započni ovaj test!", "Test", "Pitanja", new { kategorijaID = item.KategorijaID },
                 new { @class = "btn btn-link" })
             </div>
         </div>

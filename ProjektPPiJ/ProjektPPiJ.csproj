@@ -271,6 +271,7 @@
     <Content Include="Content\jQuery.FileUpload\img\loading.gif" />
     <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
     <Content Include="Content\NoviBootstrap.css" />
+    <Content Include="Content\Sad-face-rage-comic.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -471,6 +472,7 @@
     <Content Include="Views\Predmeti\OdaberiPredmet.cshtml" />
     <Content Include="Views\Kategorije\OdaberiKategoriju.cshtml" />
     <Content Include="Views\UserInfo\UserDashboard.cshtml" />
+    <Content Include="Views\Shared\Nedostupno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />
