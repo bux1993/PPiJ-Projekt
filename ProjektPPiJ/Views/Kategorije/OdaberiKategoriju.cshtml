@@ -7,44 +7,18 @@
 <h2>Odaberi Kategoriju</h2>
 
 
-<table class="table table-striped table-bordered" >
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.KategorijaName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Predmeti.PredmetName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.KategorijaName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Predmeti.PredmetName)
-        </td>
-        <td>
-            @Html.ActionLink("Započni ovaj test!", "Test", "Pitanja", new { id=item.KategorijaID }, null) 
-        </td>
-    </tr>
-}
-
-</table>
-
-@foreach (var item in Model)
-{
-    <div class="alert alert-dismissible alert-success col-sm-3">
-        <div>
-            @Html.DisplayFor(m => item.KategorijaName)
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="alert alert-dismissible alert-success col-sm-3">
+            <div>
+                @Html.DisplayFor(m => item.KategorijaName)
+            </div>
+            <div>
+                @Html.ActionLink("Započni ovaj test!", "Test", "Pitanja", new { id = item.KategorijaID },
+                new { @class = "btn btn-link" })
+            </div>
         </div>
-        <div>
-            @Html.ActionLink("Odaberi željenu kategoriju", "OdaberiKategoriju", "Kategorije",
-            new { id = item.KategorijaID }, new { @class = "btn btn-link" })
-        </div>
-    </div>
-    <div class="col-sm-1"></div>
-}
-<div class="col-sm-12"></div>
+        <div class="col-sm-1"></div>
+    }
+</div>

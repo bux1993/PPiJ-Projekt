@@ -7,35 +7,19 @@
 <h2>Odaberi predmet koji želiš sljedeće pokoriti i ostale učiniti zavidnima</h2>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PredmetName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PredmetName)
-        </td>
-        <td>
-            @Html.ActionLink("Odaberi željenu kategoriju", "OdaberiKategoriju", "Kategorije",
-            new { id = item.PredmetID }, null) 
-        </td>
-    </tr>
-}
-
-</table>
-@foreach (var item in Model)
-{
-    <div class="alert alert-dismissible alert-success col-sm-3 ">
-        <div>@Html.DisplayFor(m => item.PredmetName)</div>
-        <div >
-            @Html.ActionLink("Odaberi željenu kategoriju", "OdaberiKategoriju", "Kategorije",
-            new { id = item.PredmetID }, new {@class="btn btn-link" })
-    </div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="alert alert-dismissible alert-success col-sm-3 ">
+            <div>
+                @Html.DisplayFor(m => item.PredmetName)
+            </div>
+            <div >
+                @Html.ActionLink("Odaberi željenu kategoriju", "OdaberiKategoriju", "Kategorije",
+                new { id = item.PredmetID }, new {@class="btn btn-link" })
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    }
 </div>
-    <div class="col-sm-1"></div>
-}
+ 
