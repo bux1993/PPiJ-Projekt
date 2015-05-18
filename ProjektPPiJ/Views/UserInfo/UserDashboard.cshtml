@@ -8,8 +8,15 @@
     Dobro došao na svoju radnu površinu
     @Html.ActionLink("Odaberi kviz", "OdaberiPredmet", "Predmeti", null, new { @class = "btn btn-primary pull-right" })
 </h2>
-
-<div>
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <a href="#podaci" class="btn btn-default">Podaci o korisniku</a>
+        <a href="#achievements" class="btn btn-default">Achievementi</a>
+        <a href="#rezultati" class="btn btn-default">Ostvarenja u pojedinim kategorijama</a>
+        <a href="#" class="btn btn-default">4</a>
+    </div>
+</div>
+<div id="podaci">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,14 +25,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
         </dd>
 
         <dt>
@@ -72,6 +71,45 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) 
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID })
 </p>
 
+<div id="achievements" class="row ">
+    @foreach (var item in Model.OstvareniAchievementi)
+    {
+        if (item.AchivementOstvaren)
+        {
+            <div class="alert alert-dismissible alert-success col-sm-2">
+                <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle"
+                     height="75" />
+                <div class="text-primary text-center">
+                    <strong class="text-info">
+                        @Html.DisplayFor(m => item.Achievements.Name)
+                    </strong>
+                </div>
+                <div class="text-center">
+                    @Html.DisplayFor(m => item.Achievements.Poruka)
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        }
+        else
+        {
+            <div class="alert alert-dismissible alert-info col-sm-2 text-muted">
+                <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle"
+                     height="75" />
+                <div>
+                    <strong class="text-center text-danger text-muted" >
+                        @Html.DisplayFor(m => item.Achievements.Name, new { @class = "text text-center" })
+                    </strong>
+                </div>
+                <div class="text-center text-muted">
+                    @Html.DisplayFor(m => item.Achievements.Poruka)
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        }
+    }
+</div>
+
+<div id="rezultati"></div>

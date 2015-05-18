@@ -68,21 +68,23 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: OstvareniAchievementi/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int? userID, int? achievementID)
         {
-            if (id == null)
+            if (userID == null || achievementID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OstvareniAchievementi ostvareniAchievementi = await db.OstvareniAchievementi.FindAsync(id);
-            if (ostvareniAchievementi == null)
+            List<OstvareniAchievementi> useroviAchievi = 
+            db.OstvareniAchievementi.Where(m => m.UserID == userID).ToList().Where(m => m.AchievementID == achievementID).ToList();
+            if (useroviAchievi == null)
             {
                 return HttpNotFound();
             }
+            OstvareniAchievementi pravaStvar = useroviAchievi.ElementAt(0);
             ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", 
-                ostvareniAchievementi.AchievementID);
-            ViewBag.UserID = new SelectList(db.UserInfo, "UserID", "Username", ostvareniAchievementi.UserID);
-            return View(ostvareniAchievementi);
+                pravaStvar.AchievementID);
+            ViewBag.UserID = new SelectList(db.UserInfo, "UserID", "Username", pravaStvar.UserID);
+            return View(pravaStvar);
         }
 
         // POST: OstvareniAchievementi/Edit/5
