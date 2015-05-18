@@ -25,24 +25,18 @@
 <div class="row">
     @using (Html.BeginForm())
     {
-        
-        <div class="form-group">
-            @Html.HiddenFor(m => m.pitanja, Model.pitanja)
-        </div>
-        
-        <input id="pitanja" name="pitanja" type="hidden" value=@Model.pitanja>
-        
+
         @Html.AntiForgeryToken()
-    
+
         int cnt = 0;
         foreach (var item in Model.pitanja)
         {
 
             <div class="form-group">
-                @Html.HiddenFor(m => m.pitanja[cnt].TocanOdgovor, item.TocanOdgovor)
-                <input id="TocanOdgovor" name="TocanOdgovor" type="hidden" value=@Model.pitanja[cnt].TocanOdgovor>
+                @Html.HiddenFor(m => Model.odgovori[cnt].pitanje, "pitanjce")
+                @Html.HiddenFor(m => Model.odgovori[cnt].tocanOdgovor, item.TocanOdgovor)
             </div>
-                    
+
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             if (item.VrstaPitanja1.VrstaPitanja1.Equals("Ponuđeni odgovori"))
             {
@@ -53,7 +47,7 @@
                 odgovori.Add(item.KriviOdgovor3);
 
                 odgovori = odgovori.OrderBy(it => rnd.Next()).ToList();
-                
+
                 <div class="form-group">
                     <div class="alert alert-dismissible alert-info">
                         <div>@Html.DisplayFor(m => item.Pitanje)</div>
@@ -70,6 +64,8 @@
             else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Unos odgovora"))
             {
                 <div class="form-group">
+                    @Html.HiddenFor(m => Model.odgovori[cnt].tocanOdgovor, item.TocanOdgovor)
+                    @Html.HiddenFor(m => Model.pitanja, item)
                     <div class="alert alert-dismissible alert-info">
                         <div>@Html.DisplayFor(m => item.Pitanje)</div>
                         <div>
@@ -106,7 +102,7 @@
                     </div>
                 </div>
             }
-            
+
             ++cnt;
         }
 

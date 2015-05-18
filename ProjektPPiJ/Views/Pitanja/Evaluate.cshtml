@@ -6,20 +6,28 @@
 }
 
 <div class="row">
-    @{int cnt = 0;}
-    <div>@Model.pitanja.Count()</div>
+    @{int cnt = 0, score = 0;}
+    
     @foreach (var item in Model.odgovori)
     {
-
-        <div>
+        <div class="alert alert-dismissible alert-info">
+            <div>@Html.DisplayFor(m => item.pitanje)</div>
             Tocan Odgovor: @Model.odgovori[cnt].tocanOdgovor <br />
             Ponudjeni Odgovor: @Model.odgovori[cnt].ponudjeniOdgovor <br />
-            Ukupno boodva: @Model.odgovori[cnt].evaluate() <br />
-        </div>
-        
+            Osvojeno bodova: @Model.odgovori[cnt].evaluate()/1 <br />
+            </div>
         <br />
-     
-        ++cnt;   
+
+        score += Model.odgovori[cnt].evaluate();
+        ++cnt;
     }
+
+    @{double perc = (double) score * 100 / cnt;}
+
+    <div>
+        Ukupni Bodovi: @score/@cnt <br /> 
+        Postotak rješenosti: @perc % <br />
+    </div>
+
 </div>
 

@@ -21,6 +21,7 @@ namespace ProjektPPiJ.Models
         public void generirajDummyOdgovore() {
             foreach (Pitanja pitanje in this.pitanja) {
                 QuestionViewModel odgovor = new QuestionViewModel();
+                odgovor.pitanje = pitanje.Pitanje;
                 odgovor.vrstaPitanja = pitanje.VrstaPitanja;
                 odgovor.tocanOdgovor = pitanje.TocanOdgovor;
                 odgovor.ponudjeniOdgovor = "Nije odgovoreno";

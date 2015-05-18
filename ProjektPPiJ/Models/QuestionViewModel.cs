@@ -8,13 +8,23 @@ namespace ProjektPPiJ.Models
     public class QuestionViewModel
     {
 
-        public short vrstaPitanja {get; set;}
+        public short vrstaPitanja { get; set; }
 
-        public string tocanOdgovor {get; set;}
-        public string ponudjeniOdgovor {get; set;}
+        public string pitanje { get; set; }
 
-        public bool evaluate() {
-            return tocanOdgovor == ponudjeniOdgovor;
+        public string tocanOdgovor { get; set; }
+        public string ponudjeniOdgovor { get; set; }
+
+        public int evaluate()
+        {
+            if (tocanOdgovor == ponudjeniOdgovor)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
     }
