@@ -19,10 +19,10 @@ namespace ProjektPPiJ.Models
         {
             this.Kategorije = new HashSet<Kategorije>();
         }
-        
+    
         public int PredmetID { get; set; }
 
-        [Display(Name = "Predmet")]
+        [Display(Name = "Naziv")]
         public string PredmetName { get; set; }
     
         public virtual ICollection<Kategorije> Kategorije { get; set; }

@@ -18,7 +18,7 @@ namespace ProjektPPiJ.Models
         public int UserID { get; set; }
         public int AchievementID { get; set; }
 
-        [Display(Name = "Ostvaren")]
+        [Display(Name = "Osvojen")]
         public bool AchivementOstvaren { get; set; }
     
         public virtual Achievements Achievements { get; set; }

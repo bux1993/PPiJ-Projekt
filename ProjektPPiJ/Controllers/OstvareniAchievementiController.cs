@@ -18,7 +18,8 @@ namespace ProjektPPiJ.Controllers
         // GET: OstvareniAchievementi
         public async Task<ActionResult> Index()
         {
-            var ostvareniAchievementi = db.OstvareniAchievementi.Include(o => o.Achievements).Include(o => o.UserInfo);
+            var ostvareniAchievementi = 
+                db.OstvareniAchievementi.Include(o => o.Achievements).Include(o => o.UserInfo);
             return View(await ostvareniAchievementi.ToListAsync());
         }
 
@@ -50,7 +51,8 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UserID,AchievementID,AchivementOstvaren")] OstvareniAchievementi ostvareniAchievementi)
+        public async Task<ActionResult> Create([Bind(Include = "UserID,AchievementID,AchivementOstvaren")] 
+            OstvareniAchievementi ostvareniAchievementi)
         {
             if (ModelState.IsValid)
             {
@@ -59,26 +61,30 @@ namespace ProjektPPiJ.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", ostvareniAchievementi.AchievementID);
+            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", 
+                ostvareniAchievementi.AchievementID);
             ViewBag.UserID = new SelectList(db.UserInfo, "UserID", "Username", ostvareniAchievementi.UserID);
             return View(ostvareniAchievementi);
         }
 
         // GET: OstvareniAchievementi/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int? userID, int? achievementID)
         {
-            if (id == null)
+            if (userID == null || achievementID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OstvareniAchievementi ostvareniAchievementi = await db.OstvareniAchievementi.FindAsync(id);
-            if (ostvareniAchievementi == null)
+            List<OstvareniAchievementi> useroviAchievi = 
+            db.OstvareniAchievementi.Where(m => m.UserID == userID).ToList().Where(m => m.AchievementID == achievementID).ToList();
+            if (useroviAchievi == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", ostvareniAchievementi.AchievementID);
-            ViewBag.UserID = new SelectList(db.UserInfo, "UserID", "Username", ostvareniAchievementi.UserID);
-            return View(ostvareniAchievementi);
+            OstvareniAchievementi pravaStvar = useroviAchievi.ElementAt(0);
+            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", 
+                pravaStvar.AchievementID);
+            ViewBag.UserID = new SelectList(db.UserInfo, "UserID", "Username", pravaStvar.UserID);
+            return View(pravaStvar);
         }
 
         // POST: OstvareniAchievementi/Edit/5
@@ -86,7 +92,8 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserID,AchievementID,AchivementOstvaren")] OstvareniAchievementi ostvareniAchievementi)
+        public async Task<ActionResult> Edit([Bind(Include = "UserID,AchievementID,AchivementOstvaren")] 
+            OstvareniAchievementi ostvareniAchievementi)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +101,8 @@ namespace ProjektPPiJ.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", ostvareniAchievementi.AchievementID);
+            ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name", 
+                ostvareniAchievementi.AchievementID);
             ViewBag.UserID = new SelectList(db.UserInfo, "UserID", "Username", ostvareniAchievementi.UserID);
             return View(ostvareniAchievementi);
         }
@@ -132,6 +140,54 @@ namespace ProjektPPiJ.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult GenerirajAchievemente(bool? registracija)
+        {
+            var ostvareniAchievement = db.OstvareniAchievementi.ToList();
+            var useri = db.UserInfo.ToList();
+            var achievementi = db.Achievements.ToList();
+            var helpLista = new List<OstvareniAchievementi>();
+            foreach (var user in useri)
+            {
+                foreach (var achiev in achievementi)
+                {
+                    OstvareniAchievementi ostvaren =  new OstvareniAchievementi{
+                        UserID = user.UserID,
+                        AchievementID = achiev.AchievementID,
+
+                    };
+                    bool ima = false;
+                    foreach (var ostAchiev in ostvareniAchievement)
+                    {
+                        if (mojEquals(ostvaren, ostAchiev))
+                        {
+                            ima = true;
+                        }
+                    }
+                    if (!ima)
+                    {
+                        helpLista.Add(new OstvareniAchievementi
+                        {
+                            UserID = user.UserID,
+                            AchievementID = achiev.AchievementID,
+                            AchivementOstvaren = false
+                        }); 
+                    }
+                }
+            }
+            db.OstvareniAchievementi.AddRange(helpLista);
+            db.SaveChanges();
+            if (registracija != null && registracija == true)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Achievements");
+        }
+
+        private bool mojEquals(OstvareniAchievementi generiran, OstvareniAchievementi baza)
+        {
+            return generiran.AchievementID.Equals(baza.AchievementID) && generiran.UserID.Equals(baza.UserID);
         }
     }
 }

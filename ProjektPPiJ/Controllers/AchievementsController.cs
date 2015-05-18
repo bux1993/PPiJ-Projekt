@@ -11,7 +11,6 @@ using ProjektPPiJ.Models;
 
 namespace ProjektPPiJ.Controllers
 {
-
     public class AchievementsController : Controller
     {
         private BazaEntities db = new BazaEntities();
@@ -48,14 +47,13 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "AchievementID,Name,Poruka,Slika")] 
-            Achievements achievements)
+        public async Task<ActionResult> Create([Bind(Include = "AchievementID,Name,Poruka,Slika,PutanjaSlike")] Achievements achievements)
         {
             if (ModelState.IsValid)
             {
                 db.Achievements.Add(achievements);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("GenerirajAchievemente", "OstvareniAchievementi");
             }
 
             return View(achievements);
@@ -81,7 +79,7 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "AchievementID,Name,Poruka,Slika")] Achievements achievements)
+        public async Task<ActionResult> Edit([Bind(Include = "AchievementID,Name,Poruka,Slika,PutanjaSlike")] Achievements achievements)
         {
             if (ModelState.IsValid)
             {

@@ -12,7 +12,8 @@
           <Property Name="AchievementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Poruka" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Slika" Type="image" Nullable="false" />
+          <Property Name="Slika" Type="varbinary(max)" />
+          <Property Name="PutanjaSlike" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Kategorije">
           <Key>
@@ -32,7 +33,7 @@
           <Property Name="AchivementOstvaren" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'TocanPoredak' in the table 'C:\USERS\NIKOLAB\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\PROJEKTPPIJ\PROJEKTPPIJ\APP_DATA\PROJEKTBAZA.MDF.dbo.Pitanja' was excluded.-->
+warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'TocanPoredak' in the table 'C:\USERS\NIKOLAB\DOCUMENTS\GITHUB\PPIJ-PROJEKT\PROJEKTPPIJ\APP_DATA\PROJEKTBAZA.MDF.dbo.Pitanja' was excluded.-->
         <EntityType Name="Pitanja">
           <Key>
             <PropertyRef Name="PitanjeID" />
@@ -228,8 +229,9 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="AchievementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Poruka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="OstvareniAchievementi" Relationship="Self.FK_OstvareniAchievementi_Achievements" FromRole="Achievements" ToRole="OstvareniAchievementi" />
+          <Property Name="PutanjaSlike" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Kategorije">
           <Key>
@@ -454,6 +456,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <EntitySetMapping Name="Achievements">
             <EntityTypeMapping TypeName="ProjektBazaModel.Achievements">
               <MappingFragment StoreEntitySet="Achievements">
+                <ScalarProperty Name="PutanjaSlike" ColumnName="PutanjaSlike" />
                 <ScalarProperty Name="AchievementID" ColumnName="AchievementID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Poruka" ColumnName="Poruka" />

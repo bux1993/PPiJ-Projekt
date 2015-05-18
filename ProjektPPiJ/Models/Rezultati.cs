@@ -16,7 +16,9 @@ namespace ProjektPPiJ.Models
     public partial class Rezultati
     {
         public int RezultatID { get; set; }
+
         public int UserID { get; set; }
+
         public int KategorijaID { get; set; }
 
         [Display(Name = "Najbolji rezultat")]
