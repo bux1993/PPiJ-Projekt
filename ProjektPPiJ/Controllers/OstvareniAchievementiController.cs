@@ -140,7 +140,7 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult GenerirajAchievemente()
+        public ActionResult GenerirajAchievemente(bool? registracija)
         {
             var ostvareniAchievement = db.OstvareniAchievementi.ToList();
             var useri = db.UserInfo.ToList();
@@ -176,6 +176,10 @@ namespace ProjektPPiJ.Controllers
             }
             db.OstvareniAchievementi.AddRange(helpLista);
             db.SaveChanges();
+            if (registracija != null && registracija == true)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return RedirectToAction("Index", "Achievements");
         }
 
