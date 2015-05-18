@@ -1,0 +1,25 @@
+﻿@model ProjektPPiJ.Models.TestViewModel
+
+
+@{
+    ViewBag.Title = "Evaluate";
+}
+
+<div class="row">
+    @{int cnt = 0;}
+    <div>@Model.pitanja.Count()</div>
+    @foreach (var item in Model.odgovori)
+    {
+
+        <div>
+            Tocan Odgovor: @Model.odgovori[cnt].tocanOdgovor <br />
+            Ponudjeni Odgovor: @Model.odgovori[cnt].ponudjeniOdgovor <br />
+            Ukupno boodva: @Model.odgovori[cnt].evaluate() <br />
+        </div>
+        
+        <br />
+     
+        ++cnt;   
+    }
+</div>
+

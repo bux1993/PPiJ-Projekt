@@ -228,7 +228,8 @@
       <DependentUpon>Baza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModels.cs" />
-    <Compile Include="Models\Odgovori.cs" />
+    <Compile Include="Models\TestViewModel.cs" />
+    <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\OstvareniAchievementi.cs">
       <DependentUpon>Baza.tt</DependentUpon>
     </Compile>
@@ -476,6 +477,7 @@
     <Content Include="Views\UserInfo\UserDashboard.cshtml" />
     <Content Include="Views\Shared\Nedostupno.cshtml" />
     <Content Include="Views\Pitanja\Talijan.cshtml" />
+    <Content Include="Views\Pitanja\Evaluate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />

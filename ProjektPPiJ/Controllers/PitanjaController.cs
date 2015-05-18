@@ -134,16 +134,19 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
+        // GET: Pitanja/Test        
         public ActionResult Test(int? kategorijaID = 1)
-        {   
+        {
             var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
             if (pitanjaTest.Count == 0)
             {
                 return View("../Shared/Nedostupno");
-            } 
+            }
+
             List<Pitanja> listaPitanja = new List<Pitanja>();
             Random random = new Random();
             List<int> nadenaPitanja = new List<int>();
+
             while (pitanjaTest.Count > 0)
             {
                 int pitanje = random.Next() % pitanjaTest.Count;
@@ -156,8 +159,23 @@ namespace ProjektPPiJ.Controllers
                 {
                     break;
                 }
+
             }
-            return View(listaPitanja);
+
+            TestViewModel tvm = new TestViewModel();
+            tvm.pitanja = listaPitanja;
+            tvm.generirajDummyOdgovore();
+
+            return View(tvm);
+        }
+
+        // POST: Pitanja/Test
+        [HttpPost]
+        [ValidateAntiForgeryTokenAttribute]
+        public ActionResult Test(TestViewModel model)
+        {
+            TempData["rezultati"] = model;
+            return RedirectToAction("Evaluate");
         }
 
         public ActionResult Talijan()
@@ -166,13 +184,12 @@ namespace ProjektPPiJ.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryTokenAttribute]
-        public ActionResult Test()
+        public ActionResult Evaluate()
         {
-
-            return RedirectToAction("Provjereno");
+            TestViewModel tvm = (TestViewModel) TempData["rezultati"];
+            return View(tvm);
         }
+
 
         public ActionResult Provjereno()
         {

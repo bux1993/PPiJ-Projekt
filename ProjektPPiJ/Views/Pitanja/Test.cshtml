@@ -1,10 +1,11 @@
-﻿@model IEnumerable<ProjektPPiJ.Models.Pitanja>
+﻿@model ProjektPPiJ.Models.TestViewModel
+
 
 @{
     ViewBag.Title = "Test";
 }
 <link href="~/Content/CountDown.css" rel="stylesheet" />
-<img src="~/Content/jigsaw-puppet.png" alt="Saw puppet" class="img-circle"/>
+<img src="~/Content/jigsaw-puppet.png" alt="Saw puppet" class="img-circle" />
 <h2 id="jigsaw">Let's play a game.</h2>
 
 
@@ -15,43 +16,65 @@
 
 <div id="clock" class="text-right"></div>
 <script type="text/javascript">
-    $('#clock').countdown(new Date( new Date().getTime() + 10 * 60 * 1000), function (event) {
+    $('#clock').countdown(new Date(new Date().getTime() + 10 * 60 * 1000), function (event) {
         var totalHours = event.offset.totalDays * 24 + event.offset.hours;
         $(this).html(event.strftime('%M min %S sec'));
     });
 </script>
 
-    <div class="row">
-        @foreach (var item in Model)
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        
+        <div class="form-group">
+            @Html.HiddenFor(m => m.pitanja, Model.pitanja)
+        </div>
+        
+        <input id="pitanja" name="pitanja" type="hidden" value=@Model.pitanja>
+        
+        @Html.AntiForgeryToken()
+    
+        int cnt = 0;
+        foreach (var item in Model.pitanja)
         {
+
+            <div class="form-group">
+                @Html.HiddenFor(m => m.pitanja[cnt].TocanOdgovor, item.TocanOdgovor)
+                <input id="TocanOdgovor" name="TocanOdgovor" type="hidden" value=@Model.pitanja[cnt].TocanOdgovor>
+            </div>
+                    
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             if (item.VrstaPitanja1.VrstaPitanja1.Equals("Ponuđeni odgovori"))
             {
-                <div class="alert alert-dismissible alert-info">
-                    <div>@Html.DisplayFor(m => item.Pitanje)</div>
-                    <div>
-                        <span>@Html.RadioButton("Odgovor", "Točno")</span>
-                        <span>@Html.DisplayFor(m => item.TocanOdgovor)</span>
-                    </div>
-                    <div>
-                        <span>@Html.RadioButton("Odgovor", "Netočno")</span>
-                        <span>@Html.DisplayFor(m => item.KriviOdgovor)</span>
-                    </div>
-                    <div>
-                        <span>@Html.RadioButton("Odgovor", "Netočno")</span>
-                        <span>@Html.DisplayFor(m => item.KriviOdgovor2)</span>
-                    </div>
-                    <div>
-                        <span>@Html.RadioButton("Odgovor", "Netočno")</span>
-                        <span>@Html.DisplayFor(m => item.KriviOdgovor3)</span>
+                List<String> odgovori = new List<String>();
+                odgovori.Add(item.TocanOdgovor);
+                odgovori.Add(item.KriviOdgovor);
+                odgovori.Add(item.KriviOdgovor2);
+                odgovori.Add(item.KriviOdgovor3);
+
+                odgovori = odgovori.OrderBy(it => rnd.Next()).ToList();
+                
+                <div class="form-group">
+                    <div class="alert alert-dismissible alert-info">
+                        <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                        @for (int i = 0; i < 4; ++i)
+                        {
+                            <div>
+                                <span>@Html.RadioButtonFor(m => Model.odgovori[cnt].ponudjeniOdgovor, odgovori[i], new { @checked = "checked" })</span>
+                                <span>@Html.DisplayFor(m => odgovori[i])</span>
+                            </div>
+                        }
                     </div>
                 </div>
             }
             else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Unos odgovora"))
             {
-                <div class="alert alert-dismissible alert-info">
-                    <div>@Html.DisplayFor(m => item.Pitanje)</div>
-                    <div>
-                        @Html.TextBox("Unos Odgovor")
+                <div class="form-group">
+                    <div class="alert alert-dismissible alert-info">
+                        <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                        <div>
+                            @Html.TextBoxFor(m => Model.odgovori[cnt].ponudjeniOdgovor);
+                        </div>
                     </div>
                 </div>
             }
@@ -61,31 +84,43 @@
             }
             else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Više točnih"))
             {
-                <div class="alert alert-dismissible alert-info">
-                    <div>@Html.DisplayFor(m => item.Pitanje)</div>
-                    <div>
-                        <span>@Html.CheckBox("Odgovor", "Točno")</span>
-                        <span>@Html.DisplayFor(m => item.TocanOdgovor)</span>
-                    </div>
-                    <div>
-                        <span>@Html.CheckBox("Odgovor", "Točno")</span>
-                        <span>@Html.DisplayFor(m => item.KriviOdgovor)</span>
-                    </div>
-                    <div>
-                        <span>@Html.CheckBox("Odgovor", "Netočno")</span>
-                        <span>@Html.DisplayFor(m => item.KriviOdgovor2)</span>
-                    </div>
-                    <div>
-                        <span>@Html.CheckBox("Odgovor", "Netočno")</span>
-                        <span>@Html.DisplayFor(m => item.KriviOdgovor3)</span>
+
+                List<String> odgovori = new List<String>();
+                odgovori.Add(item.TocanOdgovor);
+                odgovori.Add(item.KriviOdgovor);
+                odgovori.Add(item.KriviOdgovor2);
+                odgovori.Add(item.KriviOdgovor3);
+
+                odgovori = odgovori.OrderBy(it => rnd.Next()).ToList();
+
+                <div class="form-group">
+                    <div class="alert alert-dismissible alert-info">
+                        <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                        @for (int i = 0; i < 4; ++i)
+                        {
+                            <div>
+                                <span>@Html.CheckBox("Odgovor", "Točno")</span>
+                                <span>@Html.DisplayFor(m => odgovori[i])</span>
+                            </div>
+                        }
                     </div>
                 </div>
             }
-        }    
+            
+            ++cnt;
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Odgovori" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
     <div class="pull-right">
-        @Html.ActionLink("Provjeri rješenja", "Talijan", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Predajem se", "Talijan", null, new {@class = "btn btn-warning btn-sm"})
+        @Html.ActionLink("Provjeri rješenja", "Evaluate", Model, new { @class = "btn btn-warning btn-sm" })
+        @Html.ActionLink("Predajem se", "Talijan", null, new { @class = "btn btn-warning btn-sm" })
     </div>
-    
+
 </div>
 
