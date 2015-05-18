@@ -11,14 +11,11 @@ namespace ProjektPPiJ.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class OstvareniAchievementi
     {
         public int UserID { get; set; }
         public int AchievementID { get; set; }
-
-        [Display(Name = "Ostvaren")]
         public bool AchivementOstvaren { get; set; }
     
         public virtual Achievements Achievements { get; set; }

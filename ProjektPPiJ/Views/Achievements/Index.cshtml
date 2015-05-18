@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Slika)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PutanjaSlike)
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Slika)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PutanjaSlike)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AchievementID }) |

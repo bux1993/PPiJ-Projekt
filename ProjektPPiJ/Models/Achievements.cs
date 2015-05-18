@@ -11,7 +11,6 @@ namespace ProjektPPiJ.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Achievements
     {
@@ -21,12 +20,10 @@ namespace ProjektPPiJ.Models
         }
     
         public int AchievementID { get; set; }
-
-        [Display(Name = "Naziv Achievementa")]
         public string Name { get; set; }
-
         public string Poruka { get; set; }
         public byte[] Slika { get; set; }
+        public string PutanjaSlike { get; set; }
     
         public virtual ICollection<OstvareniAchievementi> OstvareniAchievementi { get; set; }
     }

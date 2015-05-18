@@ -11,7 +11,6 @@ namespace ProjektPPiJ.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Kategorije
     {
@@ -23,8 +22,6 @@ namespace ProjektPPiJ.Models
     
         public int KategorijaID { get; set; }
         public int PredmetID { get; set; }
-
-        [Display(Name = "Ime kategorije")]
         public string KategorijaName { get; set; }
     
         public virtual Predmeti Predmeti { get; set; }
