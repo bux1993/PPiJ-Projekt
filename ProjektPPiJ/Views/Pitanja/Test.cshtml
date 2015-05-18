@@ -50,16 +50,17 @@
 
                 <div class="form-group">
                     <div class="alert alert-dismissible alert-info">
-                        <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                        <div><strong class="text-danger">@Html.DisplayFor(m => item.Pitanje)</strong></div>
+                        <p><br /></p>
                         @for (int i = 0; i < 4; ++i)
                         {
                             <div>
                                 <span>
                                     @Html.RadioButtonFor(m => Model.odgovori[cnt].ponudjeniOdgovor,
                                     odgovori[i], new { @checked = "checked" })
-                            </span>
-                            <span>@Html.DisplayFor(m => odgovori[i])</span>
-                        </div>
+                                </span>
+                                <span>@Html.DisplayFor(m => odgovori[i])</span>
+                            </div>
                         }
                     </div>
                 </div>
@@ -70,7 +71,8 @@
                     @Html.HiddenFor(m => Model.odgovori[cnt].tocanOdgovor, item.TocanOdgovor)
                     @Html.HiddenFor(m => Model.pitanja, item)
                     <div class="alert alert-dismissible alert-info">
-                        <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                        <div><strong class="text-danger">@Html.DisplayFor(m => item.Pitanje)</strong></div>
+                        <p><br /></p>
                         <div>
                             @Html.TextBoxFor(m => Model.odgovori[cnt].ponudjeniOdgovor);
                         </div>
@@ -79,7 +81,21 @@
             }
             else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Što je na slici"))
             {
-
+                <div class="form-group">
+                    @Html.HiddenFor(m => Model.odgovori[cnt].tocanOdgovor, item.TocanOdgovor)
+                    @Html.HiddenFor(m => Model.pitanja, item)
+                    <div class="alert alert-dismissible alert-info">
+                        <div>
+                            <strong class="text-danger">@Html.DisplayFor(m => item.Pitanje)</strong>
+                            <img src="~/@item.KriviOdgovor" class="img-circle pull-right" height="165" />
+                        </div>
+                        <p>
+                            <br /><br /><br /><br /><br />
+                            @Html.TextBoxFor(m => Model.odgovori[cnt].ponudjeniOdgovor);
+                            <br />
+                        </p>
+                    </div>
+                </div>
             }
             else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Više točnih"))
             {
@@ -94,7 +110,8 @@
 
                 <div class="form-group">
                     <div class="alert alert-dismissible alert-info">
-                        <div>@Html.DisplayFor(m => item.Pitanje)</div>
+                        <div><strong class="text-danger">@Html.DisplayFor(m => item.Pitanje)</strong></div>
+                        <p><br /></p>
                         @for (int i = 0; i < 4; ++i)
                         {
                             <div>

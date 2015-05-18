@@ -26,6 +26,7 @@ namespace ProjektPPiJ.Models
         [Display(Name = "Korisničko ime")]
         public string Username { get; set; }
 
+        [DataType(DataType.Password)]
         [Display(Name = "Lozinka")]
         public string Password { get; set; }
 

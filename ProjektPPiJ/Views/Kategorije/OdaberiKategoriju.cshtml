@@ -10,7 +10,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="alert alert-dismissible alert-success col-sm-3">
+        <div class="alert alert-dismissible alert-success col-md-3">
             <div>
                 @Html.DisplayFor(m => item.KategorijaName)
             </div>
@@ -19,6 +19,6 @@
                 new { @class = "btn btn-link" })
             </div>
         </div>
-        <div class="col-sm-1"></div>
+        <div class="col-md-1"></div>
     }
 </div>

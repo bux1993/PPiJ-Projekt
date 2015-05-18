@@ -7,27 +7,48 @@
 
 <div class="row">
     @{int cnt = 0, score = 0;}
-    
+
     @foreach (var item in Model.odgovori)
     {
-        <div class="alert alert-dismissible alert-info">
-            <div>@Html.DisplayFor(m => item.pitanje)</div>
-            Tocan Odgovor: @Model.odgovori[cnt].tocanOdgovor <br />
-            Ponudjeni Odgovor: @Model.odgovori[cnt].ponudjeniOdgovor <br />
-            Osvojeno bodova: @Model.odgovori[cnt].evaluate()/1 <br />
+        if (@Model.odgovori[cnt].tocanOdgovor.Equals(@Model.odgovori[cnt].ponudjeniOdgovor))
+        {
+            <div class="alert alert-dismissible alert-success">
+                <div>@Html.DisplayFor(m => item.pitanje)</div>
+                <strong>Odgovor:</strong> @Model.odgovori[cnt].tocanOdgovor <br />
+                <strong>Ponudjeni Odgovor:</strong>  @Model.odgovori[cnt].ponudjeniOdgovor <br />
+                <strong>Broj bodova:</strong>  @Model.odgovori[cnt].evaluate()/1 <br />
             </div>
+        }
+        else
+        {
+            <div class="alert alert-dismissible alert-danger">
+                <div>@Html.DisplayFor(m => item.pitanje)</div>
+                <strong>Odgovor:</strong> @Model.odgovori[cnt].tocanOdgovor <br />
+                <strong>Ponudjeni Odgovor:</strong>  @Model.odgovori[cnt].ponudjeniOdgovor <br />
+                <strong>Broj bodova:</strong>  @Model.odgovori[cnt].evaluate()/1 <br />
+            </div>
+        }
+
         <br />
 
         score += Model.odgovori[cnt].evaluate();
         ++cnt;
     }
 
-    @{double perc = (double) score * 100 / cnt;}
-
-    <div>
-        Ukupni Bodovi: @score/@cnt <br /> 
-        Postotak rješenosti: @perc % <br />
-    </div>
-
+    @{double perc = (double)score * 100 / cnt;}
+    @if (perc > 50)
+    {
+        <div class="alert alert-dismissible alert-success">
+            <strong>Bodovi:</strong>  @score/@cnt <br />
+            <strong>Postotak rješenosti:</strong> @perc % <br />
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-dismissible alert-danger">
+            <strong>Bodovi:</strong>  @score/@cnt <br />
+            <strong>Postotak rješenosti:</strong> @perc % <br />
+        </div>
+    }
 </div>
 
