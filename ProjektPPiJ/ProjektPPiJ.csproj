@@ -259,7 +259,13 @@
     <Content Include="App_Data\ProjektBaza_log.ldf">
       <DependentUpon>ProjektBaza.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\Achievements\AleksandarVeliki.jpg" />
+    <Content Include="Content\Achievements\cezar.jpg" />
     <Content Include="Content\Achievements\Failed-this-city.png" />
+    <Content Include="Content\Achievements\hitler.jpg" />
+    <Content Include="Content\Achievements\pitagora.jpg" />
+    <Content Include="Content\Achievements\razlomci.png" />
+    <Content Include="Content\Achievements\talijan.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
