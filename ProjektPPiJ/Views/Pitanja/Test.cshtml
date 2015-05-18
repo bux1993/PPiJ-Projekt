@@ -97,7 +97,7 @@
                     </div>
                 </div>
             }
-            else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Više točnih"))
+            /*else if (item.VrstaPitanja1.VrstaPitanja1.Equals("Više točnih"))
             {
 
                 List<String> odgovori = new List<String>();
@@ -121,7 +121,7 @@
                         }
                     </div>
                 </div>
-            }
+            }*/
 
             ++cnt;
         }
@@ -134,7 +134,6 @@
 
     }
     <div class="pull-right">
-        @Html.ActionLink("Provjeri rješenja", "Evaluate", Model, new { @class = "btn btn-warning btn-sm" })
         @Html.ActionLink("Predajem se", "Talijan", null, new { @class = "btn btn-warning btn-sm" })
     </div>
 

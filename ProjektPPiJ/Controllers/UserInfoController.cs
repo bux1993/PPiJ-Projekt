@@ -125,15 +125,10 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserDashboard(int userID = 1014)
+        public ActionResult UserDashboard(string userName)
         {
-            UserInfo user = db.UserInfo.Find(userID);
-            var ostvareno = db.OstvareniAchievementi.Where(m => m.UserID == userID).ToList();
-            if (ostvareno.Count < db.Achievements.ToList().Count)
-            {
-                return RedirectToAction("GenerirajAchievemente", "OstvareniAchievementi");
-            }
-            return View(user);
+            List<UserInfo> users = db.UserInfo.Where(m => m.Username == userName).ToList();
+            return View(users.ElementAt(0));
         }
 
     }
