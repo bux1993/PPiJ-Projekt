@@ -15,9 +15,14 @@
 
 <div id="clock" class="text-right"></div>
 <script type="text/javascript">
-    $('#clock').countdown(new Date( new Date().getTime() + 10 * 60 * 1000), function (event) {
-        var totalHours = event.offset.totalDays * 24 + event.offset.hours;
+    $('#clock').countdown(new Date( new Date().getTime() + 1.05 * 60 * 1000), function (event) {
+        //var totalHours = event.offset.totalDays * 24 + event.offset.hours;
+        if (event.offset.seconds == 0  && event.offset.minutes==0) alert("Mila Kurcnia");
+               
         $(this).html(event.strftime('%M min %S sec'));
+        
+        
+        
     });
 </script>
 
