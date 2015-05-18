@@ -53,7 +53,7 @@ namespace ProjektPPiJ.Controllers
             {
                 db.Achievements.Add(achievements);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("GenerirajAchievemente", "OstvareniAchievementi");
             }
 
             return View(achievements);

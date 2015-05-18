@@ -128,11 +128,8 @@ namespace ProjektPPiJ.Controllers
         public ActionResult UserDashboard(int userID = 1014)
         {
             UserInfo user = db.UserInfo.Find(userID);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
             return View(user);
         }
+
     }
 }
