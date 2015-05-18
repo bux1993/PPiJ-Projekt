@@ -142,8 +142,7 @@ namespace ProjektPPiJ.Controllers
 
         public ActionResult GenerirajAchievemente()
         {
-            var ostvareniAchievement = 
-                db.OstvareniAchievementi.Include(o => o.Achievements).Include(o => o.UserInfo).ToList();
+            var ostvareniAchievement = db.OstvareniAchievementi.ToList();
             var useri = db.UserInfo.ToList();
             var achievementi = db.Achievements.ToList();
             var helpLista = new List<OstvareniAchievementi>();
@@ -156,15 +155,23 @@ namespace ProjektPPiJ.Controllers
                         AchievementID = achiev.AchievementID,
 
                     };
+                    bool ima = false;
                     foreach (var ostAchiev in ostvareniAchievement)
                     {
-                        if (!mojEquals(ostvaren, ostAchiev))
+                        if (mojEquals(ostvaren, ostAchiev))
                         {
-                            helpLista.Add(new OstvareniAchievementi{ UserID = user.UserID, 
-                                AchievementID = achiev.AchievementID, AchivementOstvaren = false });
+                            ima = true;
                         }
                     }
-                    
+                    if (!ima)
+                    {
+                        helpLista.Add(new OstvareniAchievementi
+                        {
+                            UserID = user.UserID,
+                            AchievementID = achiev.AchievementID,
+                            AchivementOstvaren = false
+                        }); 
+                    }
                 }
             }
             db.OstvareniAchievementi.AddRange(helpLista);

@@ -128,6 +128,11 @@ namespace ProjektPPiJ.Controllers
         public ActionResult UserDashboard(int userID = 1014)
         {
             UserInfo user = db.UserInfo.Find(userID);
+            var ostvareno = db.OstvareniAchievementi.Where(m => m.UserID == userID).ToList();
+            if (ostvareno.Count < db.Achievements.ToList().Count)
+            {
+                return RedirectToAction("GenerirajAchievemente", "OstvareniAchievementi");
+            }
             return View(user);
         }
 
