@@ -31,8 +31,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PutanjaSlike)
-            <img src="~/@Model.PutanjaSlike" alt=@Model.Name class="img-circle" height="100"/>
+            <div>
+                @Html.DisplayFor(model => model.PutanjaSlike)
+            </div>
+            <div>
+                <img src="~/@Model.PutanjaSlike" alt=@Model.Name class="img-circle" height="100" />
+            </div>
         </dd>
 
     </dl>

@@ -13,7 +13,7 @@
         <a href="#podaci" class="btn btn-default">Podaci o korisniku</a>
         <a href="#achievements" class="btn btn-default">Achievementi</a>
         <a href="#rezultati" class="btn btn-default">Ostvarenja u pojedinim kategorijama</a>
-        <a href="#" class="btn btn-default">4</a>
+        <a href="#extras" class="btn btn-default">Dodatni sadržaj</a>
     </div>
 </div>
 <div id="podaci">
@@ -95,11 +95,11 @@
         }
         else
         {
-            <div class="alert alert-dismissible alert-info col-sm-2 text-muted">
+            <div class="hidden col-sm-2 text-muted ">
                 <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle"
                      height="75" />
                 <div>
-                    <strong class="text-center text-danger text-muted" >
+                    <strong class="text-center text-danger text-muted">
                         @Html.DisplayFor(m => item.Achievements.Name, new { @class = "text text-center" })
                     </strong>
                 </div>
@@ -107,9 +107,28 @@
                     @Html.DisplayFor(m => item.Achievements.Poruka)
                 </div>
             </div>
-            <div class="col-sm-1"></div>
+            <div class=" hidden col-sm-1"></div>
         }
     }
 </div>
 
-<div id="rezultati"></div>
+<div id="rezultati" class="row"></div>
+<div id="extras" class="row">
+    @if (Model.UserType)
+    {
+        <div>
+            @Html.ActionLink("Pregledaj dostupna pitanja", "Index", "Pitanja", null, new { @class = "btn btn-primary" })
+        </div>
+        <div>
+            @Html.ActionLink("Pregledaj dostupne achievemente", "Index", "Achievements", null,
+            new { @class = "btn btn-primary" })
+        </div>
+    }
+    else
+    {
+        <p>Spadaš među najboljih</p>
+        <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: 45%"></div>
+        </div>
+    }
+</div>
