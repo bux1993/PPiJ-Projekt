@@ -135,7 +135,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Pitanja/Test        
-        public ActionResult Test(int? kategorijaID = 1)
+        public ActionResult Test(int kategorijaID = 1)
         {
             var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
             if (pitanjaTest.Count == 0)
@@ -167,6 +167,7 @@ namespace ProjektPPiJ.Controllers
 
             TestViewModel tvm = new TestViewModel();
             tvm.pitanja = listaPitanja;
+            tvm.KategorijaID = kategorijaID;
             tvm.generirajDummyOdgovore();
 
             return View(tvm);

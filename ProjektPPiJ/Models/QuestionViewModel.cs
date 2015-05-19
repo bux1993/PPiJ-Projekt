@@ -15,8 +15,6 @@ namespace ProjektPPiJ.Models
         public string tocanOdgovor { get; set; }
         public string ponudjeniOdgovor { get; set; }
 
-        public int KategorijaID { get; set; }
-
         public int evaluate()
         {
             if (tocanOdgovor == ponudjeniOdgovor)

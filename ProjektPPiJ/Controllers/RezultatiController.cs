@@ -134,10 +134,45 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UpdateRezultata(int kategorijaID, string username)
+        public ActionResult UpdateRezultata(int kategorijaID, string username, 
+            bool zasluzio, bool nula, double rezultatVrijednost)
         {
-
+            var rezultati = db.Rezultati.ToList();
+            var useri = db.UserInfo.ToList(); HttpNotFound();
+            bool noviUnos = true;
+            foreach (var rezultat in rezultati)
+            {
+                if (rezultat.KategorijaID == kategorijaID && rezultat.UserInfo.Username.Equals(username))
+                {
+                    noviUnos = false;
+                    rezultat.ZadnjiRezultat = dajRezultat(rezultatVrijednost);
+                    if (rezultat.ZadnjiRezultat > rezultat.NajboljiRezultat)
+                    {
+                        rezultat.NajboljiRezultat = rezultat.ZadnjiRezultat;
+                    }
+                    break;
+                }
+            }
+            if (noviUnos)
+            {
+                var pomoc = useri.Where(m => m.Username.Equals(username)).ToList();
+                Rezultati novi = new Rezultati()
+                {
+                    RezultatID = rezultati.Max(m => m.RezultatID) + 1,
+                    NajboljiRezultat = dajRezultat(rezultatVrijednost),
+                    ZadnjiRezultat = dajRezultat(rezultatVrijednost),
+                    UserID = pomoc[0].UserID,
+                    KategorijaID = kategorijaID
+                };
+                db.Rezultati.Add(novi);
+            }
+            db.SaveChanges();
             return RedirectToAction("Index", "Home");
+        }
+
+        private static int dajRezultat(double rezultatVrijednost)
+        {
+            return Convert.ToInt32(rezultatVrijednost * 500 / 33);
         }
     }
 }
