@@ -34,6 +34,7 @@
 
             <div class="form-group">
                 @Html.HiddenFor(m => Model.odgovori[cnt].pitanje, "pitanjce")
+                @Html.HiddenFor(m => Model.pitanja[cnt].KategorijaID, item.KategorijaID)
                 @Html.HiddenFor(m => Model.odgovori[cnt].tocanOdgovor, item.TocanOdgovor)
             </div>
 
