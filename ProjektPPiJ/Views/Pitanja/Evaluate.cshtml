@@ -5,6 +5,11 @@
     ViewBag.Title = "Evaluate";
 }
 
+<h2>
+    <strong>Rješenja su provjerena i prikazani su točni rezultati.</strong><br />
+    Za spremanje rezultat je potrebno kliknuti gumb <a href="#spremi">Spremi</a>
+</h2>
+
 <div class="row">
     @{int cnt = 0, score = 0;}
 
@@ -14,8 +19,8 @@
         {
             <div class="alert alert-dismissible alert-success">
                 <div>@Html.DisplayFor(m => item.pitanje)</div>
-                <strong>Odgovor:</strong> @Model.odgovori[cnt].tocanOdgovor <br />
-                <strong>Ponudjeni Odgovor:</strong>  @Model.odgovori[cnt].ponudjeniOdgovor <br />
+                <strong>Točan odgovor:</strong> @Model.odgovori[cnt].tocanOdgovor <br />
+                <strong>Ponuđeni Odgovor:</strong>  @Model.odgovori[cnt].ponudjeniOdgovor <br />
                 <strong>Broj bodova:</strong>  @Model.odgovori[cnt].evaluate()/1 <br />
             </div>
         }
@@ -23,8 +28,8 @@
         {
             <div class="alert alert-dismissible alert-danger">
                 <div>@Html.DisplayFor(m => item.pitanje)</div>
-                <strong>Odgovor:</strong> @Model.odgovori[cnt].tocanOdgovor <br />
-                <strong>Ponudjeni Odgovor:</strong>  @Model.odgovori[cnt].ponudjeniOdgovor <br />
+                <strong>Točan odgovor:</strong> @Model.odgovori[cnt].tocanOdgovor <br />
+                <strong>Ponuđeni Odgovor:</strong>  @Model.odgovori[cnt].ponudjeniOdgovor <br />
                 <strong>Broj bodova:</strong>  @Model.odgovori[cnt].evaluate()/1 <br />
             </div>
         }
@@ -39,6 +44,8 @@
     @if (perc > 50)
     {
         <div class="alert alert-dismissible alert-success">
+            <h3><strong>Provjera položena!</strong></h3>
+            <br />
             <strong>Bodovi:</strong>  @score/@cnt <br />
             <strong>Postotak rješenosti:</strong> @perc % <br />
         </div>
@@ -46,9 +53,22 @@
     else
     {
         <div class="alert alert-dismissible alert-danger">
+            <h3><strong>Provjera nije položena, za prolaz je potrebno preko 50%.</strong></h3>
+            <br />
             <strong>Bodovi:</strong>  @score/@cnt <br />
             <strong>Postotak rješenosti:</strong> @perc % <br />
         </div>
     }
+    <p>@Model.KategorijaID</p>
+    <div class="pull-right" id="spremi">
+        @Html.ActionLink("Spremi", "UpdateRezultata", "Rezultati",
+        new
+        {
+            kategorijaID = Model.KategorijaID,
+            username = User.Identity.Name,
+            zasluzio = (100.0 - perc) < 1.0,
+            nula = (perc - 0.0) < 1.0,
+            rezultatVrijednost = perc
+        }, new { @class = "btn btn-primary" })
+    </div>
 </div>
-

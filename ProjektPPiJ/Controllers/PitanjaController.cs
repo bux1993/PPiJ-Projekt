@@ -135,7 +135,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Pitanja/Test        
-        public ActionResult Test(int? kategorijaID = 1)
+        public ActionResult Test(int kategorijaID = 1)
         {
             var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
             if (pitanjaTest.Count == 0)
@@ -146,16 +146,19 @@ namespace ProjektPPiJ.Controllers
             List<Pitanja> listaPitanja = new List<Pitanja>();
             Random random = new Random();
             List<int> nadenaPitanja = new List<int>();
+            int brojDozvoljenih = 
+                pitanjaTest.Where(m => m.VrstaPitanja1.VrstaPitanja1.Equals("Više točnih")).ToList().Count;
 
             while (pitanjaTest.Count > 0)
             {
                 int pitanje = random.Next() % pitanjaTest.Count;
-                if (!nadenaPitanja.Contains(pitanje) && pitanjaTest.Count > pitanje)
+                if (!nadenaPitanja.Contains(pitanje) && pitanjaTest.Count > pitanje &&
+                    !(pitanjaTest.ElementAt(pitanje).VrstaPitanja1.VrstaPitanja1.Equals("Više točnih")))
                 {
                     nadenaPitanja.Add(pitanje);
                     listaPitanja.Add(pitanjaTest.ElementAt(pitanje));
                 }
-                if (listaPitanja.Count == 10 || nadenaPitanja.Count == pitanjaTest.Count)
+                if (listaPitanja.Count == 10 || nadenaPitanja.Count == pitanjaTest.Count - brojDozvoljenih)
                 {
                     break;
                 }
@@ -164,6 +167,7 @@ namespace ProjektPPiJ.Controllers
 
             TestViewModel tvm = new TestViewModel();
             tvm.pitanja = listaPitanja;
+            tvm.KategorijaID = kategorijaID;
             tvm.generirajDummyOdgovore();
 
             return View(tvm);

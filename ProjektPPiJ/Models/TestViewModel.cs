@@ -16,6 +16,8 @@ namespace ProjektPPiJ.Models
 
         [HiddenInput]
         public List<Pitanja> pitanja { get; set; }
+
+        public int KategorijaID { get; set; }
         public List<QuestionViewModel> odgovori { get; set; }
     
         public void generirajDummyOdgovore() {
@@ -24,7 +26,7 @@ namespace ProjektPPiJ.Models
                 odgovor.pitanje = pitanje.Pitanje;
                 odgovor.vrstaPitanja = pitanje.VrstaPitanja;
                 odgovor.tocanOdgovor = pitanje.TocanOdgovor;
-                odgovor.ponudjeniOdgovor = "Nije odgovoreno";
+                odgovor.ponudjeniOdgovor = "";
                 odgovori.Add(odgovor);
             }
         }
