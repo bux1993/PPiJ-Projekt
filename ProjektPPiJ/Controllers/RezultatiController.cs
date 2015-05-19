@@ -172,7 +172,7 @@ namespace ProjektPPiJ.Controllers
 
         private static int dajRezultat(double rezultatVrijednost)
         {
-            return Convert.ToInt32(rezultatVrijednost * 500 / 33);
+            return Convert.ToInt32(rezultatVrijednost);
         }
     }
 }

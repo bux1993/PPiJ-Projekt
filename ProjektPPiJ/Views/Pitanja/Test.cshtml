@@ -19,11 +19,16 @@
     $('#clock').countdown(new Date(new Date().getTime() + 10 * 60 * 1000), function (event) {
         var totalHours = event.offset.totalDays * 24 + event.offset.hours;
         $(this).html(event.strftime('%M min %S sec'));
+        if (event.offset.minutes == 0 && event.offset.seconds == 0) {
+            alert("Vrijeme rješavanja je isteklo!");
+            document.getElementById("form").submit();
+        }
     });
 </script>
 
 <div class="row">
-    @using (Html.BeginForm())
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form" }))
     {
 
         @Html.AntiForgeryToken()
@@ -33,8 +38,8 @@
         {
 
             <div class="form-group">
-                @Html.HiddenFor(m => Model.odgovori[cnt].pitanje, "pitanjce")
-                @Html.HiddenFor(m => Model.pitanja[cnt].KategorijaID, item.KategorijaID)
+                @Html.HiddenFor(m => Model.odgovori[cnt].pitanje, item.Pitanje)
+                @Html.HiddenFor(m => Model.KategorijaID, Model.KategorijaID)
                 @Html.HiddenFor(m => Model.odgovori[cnt].tocanOdgovor, item.TocanOdgovor)
             </div>
 
@@ -126,17 +131,18 @@
 
             ++cnt;
         }
+    
+        <div class="pull-right">
+            @Html.ActionLink("Odustajem", "Talijan", null, new { @class = "btn btn-default" })
+        </div>
 
         <div class="form-group pull-right">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Odgovori" class="btn btn-default" />
+                <input id="form" type="submit" value="Završi ispit" class="btn btn-default" />
             </div>
         </div>
 
     }
-    <div class="pull-right">
-        @Html.ActionLink("Predajem se", "Talijan", null, new { @class = "btn btn-warning btn-sm" })
-    </div>
-
+    
 </div>
 
