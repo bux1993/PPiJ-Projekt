@@ -4,17 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Index<small class="pull-right">Trenutno ima @Model.Max(m => m.PredmetID) predmeta</small></h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj novi predmet", "Create")
 </p>
 <table class="table table-striped">
     <tr class="danger">
         <th>
             @Html.DisplayNameFor(model => model.PredmetName)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {

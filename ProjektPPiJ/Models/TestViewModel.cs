@@ -25,6 +25,7 @@ namespace ProjektPPiJ.Models
                 odgovor.vrstaPitanja = pitanje.VrstaPitanja;
                 odgovor.tocanOdgovor = pitanje.TocanOdgovor;
                 odgovor.ponudjeniOdgovor = "Nije odgovoreno";
+                odgovor.KategorijaID = pitanje.Kategorije.KategorijaID;
                 odgovori.Add(odgovor);
             }
         }

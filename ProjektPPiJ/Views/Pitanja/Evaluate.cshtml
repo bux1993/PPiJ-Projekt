@@ -50,5 +50,11 @@
             <strong>Postotak rješenosti:</strong> @perc % <br />
         </div>
     }
+
+    <div class="pull-right">
+        @Html.ActionLink("Povratak na početni zaslon", "UpdateRezultata", "Rezultati",
+        new { kategorijaID = Model.odgovori[0].KategorijaID, username = User.Identity.Name },
+        new { @class = "btn btn-primary" })
+    </div>
 </div>
 

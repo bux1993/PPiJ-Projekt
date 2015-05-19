@@ -133,5 +133,11 @@ namespace ProjektPPiJ.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult UpdateRezultata(int kategorijaID, string username)
+        {
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
