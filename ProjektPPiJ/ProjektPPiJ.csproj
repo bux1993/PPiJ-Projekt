@@ -281,6 +281,12 @@
     <Content Include="Content\jQuery.FileUpload\img\loading.gif" />
     <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
     <Content Include="Content\NoviBootstrap.css" />
+    <Content Include="Content\Pitanja\etanol.png" />
+    <Content Include="Content\Pitanja\hermes.jpg" />
+    <Content Include="Content\Pitanja\hrvatska-obris.jpg" />
+    <Content Include="Content\Pitanja\italija-obris.jpg" />
+    <Content Include="Content\Pitanja\posejdon.jpg" />
+    <Content Include="Content\Pitanja\zero.jpg" />
     <Content Include="Content\Sad-face-rage-comic.jpg" />
     <Content Include="Content\talijan.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />

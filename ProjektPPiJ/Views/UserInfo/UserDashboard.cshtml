@@ -51,39 +51,23 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
-
     </dl>
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID })<br />
 </p>
-
+<h3>Achievementi</h3>
 <div id="achievements" class="row ">
     @foreach (var item in Model.OstvareniAchievementi)
     {
         if (item.AchivementOstvaren)
         {
-            <div class="alert alert-dismissible alert-success col-sm-2">
+            <div class="alert alert-dismissible alert-success col-md-2">
                 <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle"
                      height="75" />
-                <div class="text-primary text-center">
-                    <strong class="text-info">
+                <div class="text-center">
+                    <strong>
                         @Html.DisplayFor(m => item.Achievements.Name)
                     </strong>
                 </div>
@@ -91,15 +75,15 @@
                     @Html.DisplayFor(m => item.Achievements.Poruka)
                 </div>
             </div>
-            <div class="col-sm-1"></div>
+            <div class="col-md-1"></div>
         }
         else
         {
-            <div class="hidden col-sm-2 text-muted ">
+            <div class="alert alert-dismissible alert-danger col-md-2 text-muted ">
                 <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle"
                      height="75" />
-                <div>
-                    <strong class="text-center text-danger text-muted">
+                <div class="text-center">
+                    <strong class="text-center text-muted">
                         @Html.DisplayFor(m => item.Achievements.Name, new { @class = "text text-center" })
                     </strong>
                 </div>
@@ -107,26 +91,36 @@
                     @Html.DisplayFor(m => item.Achievements.Poruka)
                 </div>
             </div>
-            <div class=" hidden col-sm-1"></div>
+            <div class="col-md-1"></div>
         }
     }
 </div>
 
 <div id="rezultati" class="row"></div>
+
+
 <div id="extras" class="row">
     @if (Model.UserType)
     {
-        <div>
-            @Html.ActionLink("Pregledaj dostupna pitanja", "Index", "Pitanja", null, new { @class = "btn btn-primary" })
-        </div>
-        <div>
-            @Html.ActionLink("Pregledaj dostupne achievemente", "Index", "Achievements", null,
-            new { @class = "btn btn-primary" })
+        <h3>Extras</h3>
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                @Html.ActionLink("Pregledaj dostupna pitanja", "Index", "Pitanja", null,
+                    new { @class = "btn btn-primary" })
+                @Html.ActionLink("Pregledaj dostupne achievemente", "Index", "Achievements", null,
+                    new { @class = "btn btn-primary" })
+                @Html.ActionLink("Pregledaj sve korisnike", "Index", "UserInfo", null,
+                    new { @class = "btn btn-primary" })
+                @Html.ActionLink("Pregledaj sve kategorije", "Index", "Kategorije", null,
+                    new { @class = "btn btn-primary" })
+                @Html.ActionLink("Pregledaj sve predmete", "Index", "Predmeti", null,
+                    new { @class = "btn btn-primary" })
+            </div>
         </div>
     }
     else
     {
-        <p>Spadaš među najboljih</p>
+        <h3>Spadaš među najboljih</h3>
         <div class="progress progress-striped active">
             <div class="progress-bar" style="width: 45%"></div>
         </div>
