@@ -131,9 +131,10 @@
 
             ++cnt;
         }
-    
+
         <div class="pull-right">
-            @Html.ActionLink("Odustajem", "Talijan", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Odustajem", "DajAchievement", "Achievements",
+            new { username = User.Identity.Name, kategorijaID = 17 }, new { @class = "btn btn-default" })
         </div>
 
         <div class="form-group pull-right">
@@ -143,6 +144,6 @@
         </div>
 
     }
-    
+
 </div>
 

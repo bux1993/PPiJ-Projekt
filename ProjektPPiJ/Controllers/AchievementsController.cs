@@ -18,7 +18,8 @@ namespace ProjektPPiJ.Controllers
         // GET: Achievements
         public async Task<ActionResult> Index()
         {
-            return View(await db.Achievements.ToListAsync());
+            var achievements = db.Achievements.Include(a => a.Kategorije);
+            return View(await achievements.ToListAsync());
         }
 
         // GET: Achievements/Details/5
@@ -39,6 +40,7 @@ namespace ProjektPPiJ.Controllers
         // GET: Achievements/Create
         public ActionResult Create()
         {
+            ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName");
             return View();
         }
 
@@ -47,15 +49,16 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "AchievementID,Name,Poruka,Slika,PutanjaSlike")] Achievements achievements)
+        public async Task<ActionResult> Create([Bind(Include = "AchievementID,Name,Poruka,Slika,PutanjaSlike,KategorijaID,Poseban")] Achievements achievements)
         {
             if (ModelState.IsValid)
             {
                 db.Achievements.Add(achievements);
                 await db.SaveChangesAsync();
-                return RedirectToAction("GenerirajAchievemente", "OstvareniAchievementi");
+                return RedirectToAction("Index");
             }
 
+            ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName", achievements.KategorijaID);
             return View(achievements);
         }
 
@@ -71,6 +74,7 @@ namespace ProjektPPiJ.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName", achievements.KategorijaID);
             return View(achievements);
         }
 
@@ -79,7 +83,7 @@ namespace ProjektPPiJ.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "AchievementID,Name,Poruka,Slika,PutanjaSlike")] Achievements achievements)
+        public async Task<ActionResult> Edit([Bind(Include = "AchievementID,Name,Poruka,Slika,PutanjaSlike,KategorijaID,Poseban")] Achievements achievements)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace ProjektPPiJ.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName", achievements.KategorijaID);
             return View(achievements);
         }
 
@@ -123,6 +128,26 @@ namespace ProjektPPiJ.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult DajAchievement(string username, int kategorijaID)
+        {
+            
+            var achievements = db.Achievements.Where(m => m.KategorijaID == kategorijaID).ToList();
+            var users = db.UserInfo.Where(m => m.Username.Equals(username)).ToList();
+            UserInfo user = users[0];
+            Achievements achievement = achievements[0];
+            var ostvareni = db.OstvareniAchievementi.ToList();
+            foreach (var ost in ostvareni)
+            {
+                if (ost.UserID == user.UserID && ost.AchievementID == achievement.AchievementID)
+                {
+                    ost.AchivementOstvaren = true;
+                    break;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -14,6 +14,8 @@
           <Property Name="Poruka" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Slika" Type="varbinary(max)" />
           <Property Name="PutanjaSlike" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KategorijaID" Type="int" />
+          <Property Name="Poseban" Type="bit" />
         </EntityType>
         <EntityType Name="Kategorije">
           <Key>
@@ -95,6 +97,18 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="VrstaPitanjaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VrstaPitanja" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Achievements_Kategorije">
+          <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="0..1" />
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorije">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Achievements">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Kategorije_Predmeti">
           <End Role="Predmeti" Type="Self.Predmeti" Multiplicity="1" />
           <End Role="Kategorije" Type="Self.Kategorije" Multiplicity="*" />
@@ -189,6 +203,10 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VrstaPitanja" EntityType="Self.VrstaPitanja" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Achievements_Kategorije" Association="Self.FK_Achievements_Kategorije">
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Achievements" EntitySet="Achievements" />
+          </AssociationSet>
           <AssociationSet Name="FK_Kategorije_Predmeti" Association="Self.FK_Kategorije_Predmeti">
             <End Role="Predmeti" EntitySet="Predmeti" />
             <End Role="Kategorije" EntitySet="Kategorije" />
@@ -232,6 +250,9 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="OstvareniAchievementi" Relationship="Self.FK_OstvareniAchievementi_Achievements" FromRole="Achievements" ToRole="OstvareniAchievementi" />
           <Property Name="PutanjaSlike" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KategorijaID" Type="Int32" />
+          <Property Name="Poseban" Type="Boolean" />
+          <NavigationProperty Name="Kategorije" Relationship="ProjektBazaModel.FK_Achievements_Kategorije" FromRole="Achievements" ToRole="Kategorije" />
         </EntityType>
         <EntityType Name="Kategorije">
           <Key>
@@ -243,6 +264,7 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <NavigationProperty Name="Predmeti" Relationship="Self.FK_Kategorije_Predmeti" FromRole="Kategorije" ToRole="Predmeti" />
           <NavigationProperty Name="Pitanja" Relationship="Self.FK_PovijestGrcka_Kategorije" FromRole="Kategorije" ToRole="Pitanja" />
           <NavigationProperty Name="Rezultati" Relationship="Self.FK_Rezultati_Kategorije" FromRole="Kategorije" ToRole="Rezultati" />
+          <NavigationProperty Name="Achievements" Relationship="ProjektBazaModel.FK_Achievements_Kategorije" FromRole="Kategorije" ToRole="Achievements" />
         </EntityType>
         <EntityType Name="OstvareniAchievementi">
           <Key>
@@ -426,6 +448,10 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
             <End Role="VrstaPitanja" EntitySet="VrstaPitanja" />
             <End Role="Pitanja" EntitySet="Pitanja" />
           </AssociationSet>
+          <AssociationSet Name="FK_Achievements_Kategorije" Association="ProjektBazaModel.FK_Achievements_Kategorije">
+            <End Role="Kategorije" EntitySet="Kategorije" />
+            <End Role="Achievements" EntitySet="Achievements" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="VrstaPitanja">
           <Key>
@@ -447,6 +473,18 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Achievements_Kategorije">
+          <End Type="ProjektBazaModel.Kategorije" Role="Kategorije" Multiplicity="0..1" />
+          <End Type="ProjektBazaModel.Achievements" Role="Achievements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorije">
+              <PropertyRef Name="KategorijaID" />
+            </Principal>
+            <Dependent Role="Achievements">
+              <PropertyRef Name="KategorijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -456,6 +494,8 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <EntitySetMapping Name="Achievements">
             <EntityTypeMapping TypeName="ProjektBazaModel.Achievements">
               <MappingFragment StoreEntitySet="Achievements">
+                <ScalarProperty Name="Poseban" ColumnName="Poseban" />
+                <ScalarProperty Name="KategorijaID" ColumnName="KategorijaID" />
                 <ScalarProperty Name="PutanjaSlike" ColumnName="PutanjaSlike" />
                 <ScalarProperty Name="AchievementID" ColumnName="AchievementID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

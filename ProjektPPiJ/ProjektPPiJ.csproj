@@ -228,6 +228,7 @@
       <DependentUpon>Baza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModels.cs" />
+    <Compile Include="Models\RangListaViewModel.cs" />
     <Compile Include="Models\TestViewModel.cs" />
     <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\OstvareniAchievementi.cs">
@@ -492,6 +493,7 @@
     <Content Include="Views\Achievements\Details.cshtml" />
     <Content Include="Views\Achievements\Edit.cshtml" />
     <Content Include="Views\Achievements\Index.cshtml" />
+    <Content Include="Views\Rezultati\RangLista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />

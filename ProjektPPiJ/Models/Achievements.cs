@@ -24,12 +24,20 @@ namespace ProjektPPiJ.Models
 
         [Display(Name = "Naziv")]
         public string Name { get; set; }
+
         public string Poruka { get; set; }
+
         public byte[] Slika { get; set; }
 
         [Display(Name = "Putanja do slike")]
         public string PutanjaSlike { get; set; }
+
+        [Display(Name = "Kategorija")]
+        public Nullable<int> KategorijaID { get; set; }
+
+        public Nullable<bool> Poseban { get; set; }
     
         public virtual ICollection<OstvareniAchievementi> OstvareniAchievementi { get; set; }
+        public virtual Kategorije Kategorije { get; set; }
     }
 }

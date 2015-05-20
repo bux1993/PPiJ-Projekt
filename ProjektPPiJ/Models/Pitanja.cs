@@ -16,7 +16,11 @@ namespace ProjektPPiJ.Models
     public partial class Pitanja
     {
         public int PitanjeID { get; set; }
+
+        [Display(Name = "Kategorija")]
         public int KategorijaID { get; set; }
+
+        [Display(Name = "Vrsta pitanja")]
         public short VrstaPitanja { get; set; }
 
         public string Pitanje { get; set; }

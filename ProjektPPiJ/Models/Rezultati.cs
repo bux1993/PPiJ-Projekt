@@ -17,8 +17,10 @@ namespace ProjektPPiJ.Models
     {
         public int RezultatID { get; set; }
 
+        [Display(Name = "Korisnik")]
         public int UserID { get; set; }
 
+        [Display(Name = "Kategorija")]
         public int KategorijaID { get; set; }
 
         [Display(Name = "Najbolji rezultat")]

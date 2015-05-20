@@ -26,8 +26,8 @@ namespace ProjektPPiJ.Models
         [Display(Name = "Korisničko ime")]
         public string Username { get; set; }
 
-        [DataType(DataType.Password)]
         [Display(Name = "Lozinka")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Display(Name = "Ime")]
@@ -36,10 +36,12 @@ namespace ProjektPPiJ.Models
         [Display(Name = "Prezime")]
         public string LastName { get; set; }
 
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Display(Name = "Admin")]
         public bool UserType { get; set; }
-
         public byte[] Picture { get; set; }
     
         public virtual ICollection<OstvareniAchievementi> OstvareniAchievementi { get; set; }

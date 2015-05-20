@@ -10,6 +10,8 @@
 <div class="row">
     @foreach (var item in Model)
     {
+        if (item.KategorijaName != "arrow" && item.KategorijaName != "talijan" )
+        {
         <div class="alert alert-dismissible alert-success col-md-3">
             <div>
                 @Html.DisplayFor(m => item.KategorijaName)
@@ -20,5 +22,6 @@
             </div>
         </div>
         <div class="col-md-1"></div>
+        }
     }
 </div>

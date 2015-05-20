@@ -27,16 +27,35 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Slika)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slika)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.PutanjaSlike)
         </dt>
 
         <dd>
-            <div>
-                @Html.DisplayFor(model => model.PutanjaSlike)
-            </div>
-            <div>
-                <img src="~/@Model.PutanjaSlike" alt=@Model.Name class="img-circle" height="100" />
-            </div>
+            @Html.DisplayFor(model => model.PutanjaSlike)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Poseban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Poseban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategorije.KategorijaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategorije.KategorijaName)
         </dd>
 
     </dl>

@@ -68,7 +68,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: OstvareniAchievementi/Edit/5
-        public async Task<ActionResult> Edit(int? userID, int? achievementID)
+        public ActionResult Edit(int? userID, int? achievementID)
         {
             if (userID == null || achievementID == null)
             {

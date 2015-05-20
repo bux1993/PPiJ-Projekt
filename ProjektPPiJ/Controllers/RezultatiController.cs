@@ -167,6 +167,16 @@ namespace ProjektPPiJ.Controllers
                 db.Rezultati.Add(novi);
             }
             db.SaveChanges();
+            if (zasluzio)
+            {
+                return RedirectToAction("DajAchievement", "Achievements", 
+                    new { username = username, kategorijaID = kategorijaID});
+            }
+            else if (nula)
+            {
+                return RedirectToAction("DajAchievement", "Achievements", 
+                    new { username = username, kategorijaID = 16});
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -174,5 +184,38 @@ namespace ProjektPPiJ.Controllers
         {
             return Convert.ToInt32(rezultatVrijednost);
         }
+
+
+        public ActionResult RangLista()
+        {
+            var rezultati = db.Rezultati.ToList();
+            var kategorije = db.Kategorije.ToList();
+            List<RangListaViewModel> povratno = new List<RangListaViewModel>();
+            foreach (var kategorija in kategorije)
+            {
+                RangListaViewModel rangLista = new RangListaViewModel()
+                {
+                    Poredak = new List<Uspjeh>(),
+                    KategorijaName = kategorija.KategorijaName
+                };
+                List<Uspjeh> poredak = new List<Uspjeh>();
+                foreach (var rezultat in rezultati)
+                {
+                    if (rezultat.KategorijaID.Equals(kategorija.KategorijaID))
+                    {
+                        Uspjeh novi = new Uspjeh()
+                        {
+                            Username = rezultat.UserInfo.Username,
+                            NajboljiRezultat = rezultat.NajboljiRezultat
+                        };
+                        poredak.Add(novi);
+                    }   
+                }
+                rangLista.Poredak = poredak.OrderByDescending(m => m.NajboljiRezultat).Take(10).ToList();
+                povratno.Add(rangLista);
+            }
+            return View(povratno);
+        }
+
     }
 }

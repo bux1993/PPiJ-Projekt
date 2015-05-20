@@ -21,6 +21,7 @@
         <AssociationConnector Association="ProjektBazaModel.FK_Rezultati_UserInfo" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ProjektBazaModel.VrstaPitanja" Width="1.5" PointX="6.125" PointY="6.125" />
         <AssociationConnector Association="ProjektBazaModel.FK_Pitanja_VrstaPitanja" />
+        <AssociationConnector Association="ProjektBazaModel.FK_Achievements_Kategorije" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

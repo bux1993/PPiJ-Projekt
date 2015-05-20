@@ -59,15 +59,14 @@
             <strong>Postotak rješenosti:</strong> @perc % <br />
         </div>
     }
-    <p>@Model.KategorijaID</p>
     <div class="pull-right" id="spremi">
         @Html.ActionLink("Spremi", "UpdateRezultata", "Rezultati",
         new
         {
             kategorijaID = Model.KategorijaID,
             username = User.Identity.Name,
-            zasluzio = (100.0 - perc) < 1.0,
-            nula = (perc - 0.0) < 1.0,
+            zasluzio = Convert.ToInt32(perc) == 100,
+            nula = Convert.ToInt32(perc) == 0,
             rezultatVrijednost = perc
         }, new { @class = "btn btn-primary" })
     </div>

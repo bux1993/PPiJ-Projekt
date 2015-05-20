@@ -96,8 +96,35 @@
     }
 </div>
 
-<div id="rezultati" class="row"></div>
+<h3>Rezultati po kategorijama</h3>
 
+<div id="rezultati" class="row">
+    @foreach (var item in Model.Rezultati)
+    {
+        if (item.KategorijaID != 16 && item.KategorijaID != 17)
+        {
+            <h4>@Html.DisplayFor(model => item.Kategorije.KategorijaName)</h4>
+            <table class="table table-striped info">
+                <tr class="danger">
+                    <th>
+                        Najbolji Rezultat
+                    </th>
+                    <th>
+                        Zadnji Rezultat
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @item.NajboljiRezultat
+                    </td>
+                    <td>
+                        @item.ZadnjiRezultat
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+</div>
 
 <div id="extras" class="row">
     @if (Model.UserType)

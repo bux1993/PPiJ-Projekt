@@ -19,17 +19,20 @@ namespace ProjektPPiJ.Models
         {
             this.Pitanja = new HashSet<Pitanja>();
             this.Rezultati = new HashSet<Rezultati>();
+            this.Achievements = new HashSet<Achievements>();
         }
     
         public int KategorijaID { get; set; }
 
+        [Display(Name = "Predmet")]
         public int PredmetID { get; set; }
 
-        [Display(Name = "Naziv kategorije")]
+        [Display(Name = "Naziv")]
         public string KategorijaName { get; set; }
     
         public virtual Predmeti Predmeti { get; set; }
         public virtual ICollection<Pitanja> Pitanja { get; set; }
         public virtual ICollection<Rezultati> Rezultati { get; set; }
+        public virtual ICollection<Achievements> Achievements { get; set; }
     }
 }
