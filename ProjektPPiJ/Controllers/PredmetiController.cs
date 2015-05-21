@@ -16,12 +16,14 @@ namespace ProjektPPiJ.Controllers
         private BazaEntities db = new BazaEntities();
 
         // GET: Predmeti
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             return View(await db.Predmeti.ToListAsync());
         }
 
         // GET: Predmeti/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Predmeti/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -60,6 +63,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Predmeti/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +95,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Predmeti/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,7 +129,7 @@ namespace ProjektPPiJ.Controllers
             }
             base.Dispose(disposing);
         }
-
+        [Authorize()]
         public async  Task<ActionResult> OdaberiPredmet()
         {
             return View( await db.Predmeti.ToListAsync());

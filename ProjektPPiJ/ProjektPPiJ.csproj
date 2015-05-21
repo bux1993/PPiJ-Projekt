@@ -260,13 +260,22 @@
     <Content Include="App_Data\ProjektBaza_log.ldf">
       <DependentUpon>ProjektBaza.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\Achievements\akcija-reakcija.jpg" />
     <Content Include="Content\Achievements\AleksandarVeliki.jpg" />
     <Content Include="Content\Achievements\cezar.jpg" />
+    <Content Include="Content\Achievements\darwin.jpg" />
     <Content Include="Content\Achievements\Failed-this-city.png" />
+    <Content Include="Content\Achievements\fluid.jpg" />
     <Content Include="Content\Achievements\hitler.jpg" />
+    <Content Include="Content\Achievements\maja.jpg" />
     <Content Include="Content\Achievements\pitagora.jpg" />
+    <Content Include="Content\Achievements\plus-minus.jpg" />
     <Content Include="Content\Achievements\razlomci.png" />
+    <Content Include="Content\Achievements\sinus.jpg" />
     <Content Include="Content\Achievements\talijan.png" />
+    <Content Include="Content\Achievements\toplinski.jpg" />
+    <Content Include="Content\Achievements\visual.png" />
+    <Content Include="Content\Achievements\voda.jpg" />
     <Content Include="Content\Achievements\world-map.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

@@ -16,6 +16,7 @@ namespace ProjektPPiJ.Controllers
         private BazaEntities db = new BazaEntities();
 
         // GET: Kategorije
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var kategorije = db.Kategorije.Include(k => k.Predmeti);
@@ -23,6 +24,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Kategorije/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Kategorije/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.PredmetID = new SelectList(db.Predmeti, "PredmetID", "PredmetName");
@@ -63,6 +66,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Kategorije/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,6 +100,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Kategorije/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,6 +135,7 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize()]
         public async Task<ActionResult> OdaberiKategoriju(int? predmetID = 1)
         {
             var kategorijeIzbor =  await db.Kategorije.Where(m => m.PredmetID == predmetID).ToListAsync();

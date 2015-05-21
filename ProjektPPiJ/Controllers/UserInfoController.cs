@@ -16,12 +16,14 @@ namespace ProjektPPiJ.Controllers
         private BazaEntities db = new BazaEntities();
 
         // GET: UserInfo
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             return View(await db.UserInfo.ToListAsync());
         }
 
         // GET: UserInfo/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: UserInfo/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -60,6 +63,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: UserInfo/Edit/5
+        [Authorize()]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +95,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: UserInfo/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,6 +130,7 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize()]
         public ActionResult UserDashboard(string userName)
         {
             List<UserInfo> users = db.UserInfo.Where(m => m.Username == userName).ToList();

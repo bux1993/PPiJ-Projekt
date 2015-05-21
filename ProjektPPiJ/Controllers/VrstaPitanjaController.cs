@@ -11,6 +11,7 @@ using ProjektPPiJ.Models;
 
 namespace ProjektPPiJ.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class VrstaPitanjaController : Controller
     {
         private BazaEntities db = new BazaEntities();

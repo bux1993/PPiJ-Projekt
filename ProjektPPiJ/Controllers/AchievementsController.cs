@@ -16,6 +16,7 @@ namespace ProjektPPiJ.Controllers
         private BazaEntities db = new BazaEntities();
 
         // GET: Achievements
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var achievements = db.Achievements.Include(a => a.Kategorije);
@@ -23,6 +24,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Achievements/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Achievements/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName");
@@ -55,7 +58,7 @@ namespace ProjektPPiJ.Controllers
             {
                 db.Achievements.Add(achievements);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("GenerirajAchievemente", "OstvareniAchievementiController");
             }
 
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName", achievements.KategorijaID);
@@ -63,6 +66,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Achievements/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,6 +100,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Achievements/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)

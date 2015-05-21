@@ -16,6 +16,7 @@ namespace ProjektPPiJ.Controllers
         private BazaEntities db = new BazaEntities();
 
         // GET: Pitanja
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var pitanja = db.Pitanja.Include(p => p.Kategorije).Include(p => p.VrstaPitanja1);
@@ -23,6 +24,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Pitanja/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Pitanja/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName");
@@ -65,6 +68,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Pitanja/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -100,6 +104,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Pitanja/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +139,8 @@ namespace ProjektPPiJ.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Pitanja/Test        
+        // GET: Pitanja/Test       
+        [Authorize()]
         public ActionResult Test(int kategorijaID = 1)
         {
             var pitanjaTest = db.Pitanja.Where(m => m.KategorijaID == kategorijaID).ToList();
@@ -182,12 +188,13 @@ namespace ProjektPPiJ.Controllers
             return RedirectToAction("Evaluate");
         }
 
+        [Authorize()]
         public ActionResult Talijan()
         {
             return View();
         }
 
-
+        [Authorize()]
         public ActionResult Evaluate()
         {
             TestViewModel tvm = (TestViewModel) TempData["rezultati"];

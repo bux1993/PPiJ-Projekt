@@ -16,6 +16,7 @@ namespace ProjektPPiJ.Controllers
         private BazaEntities db = new BazaEntities();
 
         // GET: Rezultati
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var rezultati = db.Rezultati.Include(r => r.Kategorije).Include(r => r.UserInfo);
@@ -23,6 +24,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Rezultati/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Rezultati/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.KategorijaID = new SelectList(db.Kategorije, "KategorijaID", "KategorijaName");
@@ -65,6 +68,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Rezultati/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -100,6 +104,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: Rezultati/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -185,7 +190,7 @@ namespace ProjektPPiJ.Controllers
             return Convert.ToInt32(rezultatVrijednost);
         }
 
-
+        [Authorize()]
         public ActionResult RangLista()
         {
             var rezultati = db.Rezultati.ToList();

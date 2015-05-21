@@ -11,6 +11,7 @@ namespace ProjektPPiJ.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class VrstaPitanja
     {
@@ -20,6 +21,8 @@ namespace ProjektPPiJ.Models
         }
     
         public short VrstaPitanjaID { get; set; }
+
+        [Display(Name = "Vrsta pitanja")]
         public string VrstaPitanja1 { get; set; }
     
         public virtual ICollection<Pitanja> Pitanja { get; set; }

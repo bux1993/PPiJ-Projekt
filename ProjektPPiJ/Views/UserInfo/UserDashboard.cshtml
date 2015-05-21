@@ -6,7 +6,7 @@
 
 <h2>
     Dobro došao na svoju radnu površinu
-    @Html.ActionLink("Odaberi kviz", "OdaberiPredmet", "Predmeti", null, new { @class = "btn btn-primary pull-right" })
+    @Html.ActionLink("Odaberi arenu", "OdaberiPredmet", "Predmeti", null, new { @class = "btn btn-primary pull-right" })
 </h2>
 <div class="btn-toolbar">
     <div class="btn-group">
@@ -58,13 +58,13 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.UserID })<br />
 </p>
 <h3>Achievementi</h3>
-<div id="achievements" class="row ">
+<div id="achievements" class="row">
     @foreach (var item in Model.OstvareniAchievementi)
     {
         if (item.AchivementOstvaren)
         {
-            <div class="alert alert-dismissible alert-success col-md-2">
-                <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle"
+            <div class="alert alert-dismissible alert-success col-md-3">
+                <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle center-block"
                      height="75" />
                 <div class="text-center">
                     <strong>
@@ -79,8 +79,8 @@
         }
         else
         {
-            <div class="alert alert-dismissible alert-danger col-md-2 text-muted ">
-                <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle"
+            <div class="alert alert-dismissible alert-danger col-md-3 text-muted ">
+                <img src="~/@item.Achievements.PutanjaSlike" alt=@item.Achievements.Name class="img-circle center-block"
                      height="75" />
                 <div class="text-center">
                     <strong class="text-center text-muted">
@@ -93,12 +93,13 @@
             </div>
             <div class="col-md-1"></div>
         }
+        
     }
 </div>
 
 <h3>Rezultati po kategorijama</h3>
 
-<div id="rezultati" class="row">
+<div id="rezultati" class="row alert alert-info ">
     @foreach (var item in Model.Rezultati)
     {
         if (item.KategorijaID != 16 && item.KategorijaID != 17)

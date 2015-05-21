@@ -16,6 +16,7 @@ namespace ProjektPPiJ.Controllers
         private BazaEntities db = new BazaEntities();
 
         // GET: OstvareniAchievementi
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var ostvareniAchievementi = 
@@ -24,6 +25,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: OstvareniAchievementi/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,6 +41,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: OstvareniAchievementi/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.AchievementID = new SelectList(db.Achievements, "AchievementID", "Name");
@@ -68,6 +71,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: OstvareniAchievementi/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? userID, int? achievementID)
         {
             if (userID == null || achievementID == null)
@@ -108,6 +112,7 @@ namespace ProjektPPiJ.Controllers
         }
 
         // GET: OstvareniAchievementi/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
